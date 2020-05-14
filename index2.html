@@ -1,0 +1,2338 @@
+<!DOCTYPE html>
+<html class='h-100' lang='ru' prefix='og: https://ogp.me/ns#'>
+
+<head>
+    <title>Чистые функции - JS: Функции</title>
+    <meta name="csrf-param" content="authenticity_token" />
+    <meta name="csrf-token"
+        content="FiugNaFx9RxcxwgGWMgjwAwJ2JXcOnaN4W6PklQrEpSaqzRegfuUIdT2vrYB4n4Cw+ZOeIer8qOZDK83nQF7pg==" />
+    <meta name="csp-nonce" />
+    <link rel="shortcut icon" type="image/x-icon"
+        href="https://cdn2.hexlet.io/assets/favicon-8fa102c058afb01de5016a155d7db433283dc7e08ddc3c4d1aef527c1b8502b6.ico" />
+    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport'>
+    <meta charset='utf-8'>
+    <script type="adf064d97066fcb9b05c1528-text/javascript">
+        var _rollbarConfig = {
+            "accessToken": "fc27636027d0460bbc1578d97d0d27ad",
+            "captureUncaught": true,
+            "captureUnhandledRejections": true,
+            "hostWhiteList": ["https://cdn2.hexlet.io"],
+            "ignoredMessages": ["Script error"],
+            "payload": {
+                "client": {
+                    "source_map_enabled": true,
+                    "code_version": "v4176",
+                    "guess_uncaught_frames": true
+                },
+                "environment": "production",
+                "person": {
+                    "id": 200894,
+                    "username": "Irina Bulich",
+                    "email": null
+                }
+            }
+        };
+    </script>
+    <script type="adf064d97066fcb9b05c1528-text/javascript">
+        ! function (r) {
+            var e = {};
+
+            function o(n) {
+                if (e[n]) return e[n].exports;
+                var t = e[n] = {
+                    i: n,
+                    l: !1,
+                    exports: {}
+                };
+                return r[n].call(t.exports, t, t.exports, o), t.l = !0, t.exports
+            }
+            o.m = r, o.c = e, o.d = function (r, e, n) {
+                o.o(r, e) || Object.defineProperty(r, e, {
+                    enumerable: !0,
+                    get: n
+                })
+            }, o.r = function (r) {
+                "undefined" != typeof Symbol && Symbol.toStringTag && Object.defineProperty(r, Symbol.toStringTag, {
+                    value: "Module"
+                }), Object.defineProperty(r, "__esModule", {
+                    value: !0
+                })
+            }, o.t = function (r, e) {
+                if (1 & e && (r = o(r)), 8 & e) return r;
+                if (4 & e && "object" == typeof r && r && r.__esModule) return r;
+                var n = Object.create(null);
+                if (o.r(n), Object.defineProperty(n, "default", {
+                        enumerable: !0,
+                        value: r
+                    }), 2 & e && "string" != typeof r)
+                    for (var t in r) o.d(n, t, function (e) {
+                        return r[e]
+                    }.bind(null, t));
+                return n
+            }, o.n = function (r) {
+                var e = r && r.__esModule ? function () {
+                    return r.default
+                } : function () {
+                    return r
+                };
+                return o.d(e, "a", e), e
+            }, o.o = function (r, e) {
+                return Object.prototype.hasOwnProperty.call(r, e)
+            }, o.p = "", o(o.s = 0)
+        }([function (r, e, o) {
+            var n = o(1),
+                t = o(4);
+            _rollbarConfig = _rollbarConfig || {}, _rollbarConfig.rollbarJsUrl = _rollbarConfig.rollbarJsUrl ||
+                "https://cdnjs.cloudflare.com/ajax/libs/rollbar.js/2.12.3/rollbar.min.js", _rollbarConfig
+                .async = void 0 === _rollbarConfig.async || _rollbarConfig.async;
+            var a = n.setupShim(window, _rollbarConfig),
+                l = t(_rollbarConfig);
+            window.rollbar = n.Rollbar, a.loadFull(window, document, !_rollbarConfig.async, _rollbarConfig, l)
+        }, function (r, e, o) {
+            var n = o(2);
+
+            function t(r) {
+                return function () {
+                    try {
+                        return r.apply(this, arguments)
+                    } catch (r) {
+                        try {
+                            console.error("[Rollbar]: Internal error", r)
+                        } catch (r) {}
+                    }
+                }
+            }
+            var a = 0;
+
+            function l(r, e) {
+                this.options = r, this._rollbarOldOnError = null;
+                var o = a++;
+                this.shimId = function () {
+                    return o
+                }, "undefined" != typeof window && window._rollbarShims && (window._rollbarShims[o] = {
+                    handler: e,
+                    messages: []
+                })
+            }
+            var i = o(3),
+                s = function (r, e) {
+                    return new l(r, e)
+                },
+                d = function (r) {
+                    return new i(s, r)
+                };
+
+            function c(r) {
+                return t(function () {
+                    var e = Array.prototype.slice.call(arguments, 0),
+                        o = {
+                            shim: this,
+                            method: r,
+                            args: e,
+                            ts: new Date
+                        };
+                    window._rollbarShims[this.shimId()].messages.push(o)
+                })
+            }
+            l.prototype.loadFull = function (r, e, o, n, a) {
+                var l = !1,
+                    i = e.createElement("script"),
+                    s = e.getElementsByTagName("script")[0],
+                    d = s.parentNode;
+                i.crossOrigin = "", i.src = n.rollbarJsUrl, o || (i.async = !0), i.onload = i
+                    .onreadystatechange = t(function () {
+                        if (!(l || this.readyState && "loaded" !== this.readyState && "complete" !==
+                                this.readyState)) {
+                            i.onload = i.onreadystatechange = null;
+                            try {
+                                d.removeChild(i)
+                            } catch (r) {}
+                            l = !0,
+                                function () {
+                                    var e;
+                                    if (void 0 === r._rollbarDidLoad) {
+                                        e = new Error("rollbar.js did not load");
+                                        for (var o, n, t, l, i = 0; o = r._rollbarShims[i++];)
+                                            for (o = o.messages || []; n = o.shift();)
+                                                for (t = n.args || [], i = 0; i < t.length; ++i)
+                                                    if ("function" == typeof (l = t[i])) {
+                                                        l(e);
+                                                        break
+                                                    }
+                                    }
+                                    "function" == typeof a && a(e)
+                                }()
+                        }
+                    }), d.insertBefore(i, s)
+            }, l.prototype.wrap = function (r, e, o) {
+                try {
+                    var n;
+                    if (n = "function" == typeof e ? e : function () {
+                            return e || {}
+                        }, "function" != typeof r) return r;
+                    if (r._isWrap) return r;
+                    if (!r._rollbar_wrapped && (r._rollbar_wrapped = function () {
+                            o && "function" == typeof o && o.apply(this, arguments);
+                            try {
+                                return r.apply(this, arguments)
+                            } catch (o) {
+                                var e = o;
+                                throw e && ("string" == typeof e && (e = new String(e)), e
+                                    ._rollbarContext = n() || {}, e._rollbarContext._wrappedSource =
+                                    r.toString(), window._rollbarWrappedError = e), e
+                            }
+                        }, r._rollbar_wrapped._isWrap = !0, r.hasOwnProperty))
+                        for (var t in r) r.hasOwnProperty(t) && (r._rollbar_wrapped[t] = r[t]);
+                    return r._rollbar_wrapped
+                } catch (e) {
+                    return r
+                }
+            };
+            for (var p =
+                    "log,debug,info,warn,warning,error,critical,global,configure,handleUncaughtException,handleAnonymousErrors,handleUnhandledRejection,captureEvent,captureDomContentLoaded,captureLoad"
+                    .split(","), u = 0; u < p.length; ++u) l.prototype[p[u]] = c(p[u]);
+            r.exports = {
+                setupShim: function (r, e) {
+                    if (r) {
+                        var o = e.globalAlias || "Rollbar";
+                        if ("object" == typeof r[o]) return r[o];
+                        r._rollbarShims = {}, r._rollbarWrappedError = null;
+                        var a = new d(e);
+                        return t(function () {
+                            e.captureUncaught && (a._rollbarOldOnError = r.onerror, n
+                                    .captureUncaughtExceptions(r, a, !0), e
+                                    .wrapGlobalEventHandlers && n.wrapGlobals(r, a, !0)), e
+                                .captureUnhandledRejections && n.captureUnhandledRejections(r,
+                                    a, !0);
+                            var t = e.autoInstrument;
+                            return !1 !== e.enabled && (void 0 === t || !0 === t || "object" ==
+                                typeof t && t.network) && r.addEventListener && (r
+                                .addEventListener("load", a.captureLoad.bind(a)), r
+                                .addEventListener("DOMContentLoaded", a
+                                    .captureDomContentLoaded.bind(a))), r[o] = a, a
+                        })()
+                    }
+                },
+                Rollbar: d
+            }
+        }, function (r, e) {
+            function o(r, e, o) {
+                if (e.hasOwnProperty && e.hasOwnProperty("addEventListener")) {
+                    for (var n = e.addEventListener; n._rollbarOldAdd && n.belongsToShim;) n = n._rollbarOldAdd;
+                    var t = function (e, o, t) {
+                        n.call(this, e, r.wrap(o), t)
+                    };
+                    t._rollbarOldAdd = n, t.belongsToShim = o, e.addEventListener = t;
+                    for (var a = e.removeEventListener; a._rollbarOldRemove && a.belongsToShim;) a = a
+                        ._rollbarOldRemove;
+                    var l = function (r, e, o) {
+                        a.call(this, r, e && e._rollbar_wrapped || e, o)
+                    };
+                    l._rollbarOldRemove = a, l.belongsToShim = o, e.removeEventListener = l
+                }
+            }
+            r.exports = {
+                captureUncaughtExceptions: function (r, e, o) {
+                    if (r) {
+                        var n;
+                        if ("function" == typeof e._rollbarOldOnError) n = e._rollbarOldOnError;
+                        else if (r.onerror) {
+                            for (n = r.onerror; n._rollbarOldOnError;) n = n._rollbarOldOnError;
+                            e._rollbarOldOnError = n
+                        }
+                        e.handleAnonymousErrors();
+                        var t = function () {
+                            var o = Array.prototype.slice.call(arguments, 0);
+                            ! function (r, e, o, n) {
+                                r._rollbarWrappedError && (n[4] || (n[4] = r._rollbarWrappedError),
+                                    n[5] || (n[5] = r._rollbarWrappedError._rollbarContext), r
+                                    ._rollbarWrappedError = null);
+                                var t = e.handleUncaughtException.apply(e, n);
+                                o && o.apply(r, n), "anonymous" === t && (e
+                                    .anonymousErrorsPending += 1)
+                            }(r, e, n, o)
+                        };
+                        o && (t._rollbarOldOnError = n), r.onerror = t
+                    }
+                },
+                captureUnhandledRejections: function (r, e, o) {
+                    if (r) {
+                        "function" == typeof r._rollbarURH && r._rollbarURH.belongsToShim && r
+                            .removeEventListener("unhandledrejection", r._rollbarURH);
+                        var n = function (r) {
+                            var o, n, t;
+                            try {
+                                o = r.reason
+                            } catch (r) {
+                                o = void 0
+                            }
+                            try {
+                                n = r.promise
+                            } catch (r) {
+                                n = "[unhandledrejection] error getting `promise` from event"
+                            }
+                            try {
+                                t = r.detail, !o && t && (o = t.reason, n = t.promise)
+                            } catch (r) {}
+                            o || (o = "[unhandledrejection] error getting `reason` from event"),
+                                e && e.handleUnhandledRejection && e.handleUnhandledRejection(o, n)
+                        };
+                        n.belongsToShim = o, r._rollbarURH = n, r.addEventListener("unhandledrejection",
+                            n)
+                    }
+                },
+                wrapGlobals: function (r, e, n) {
+                    if (r) {
+                        var t, a, l =
+                            "EventTarget,Window,Node,ApplicationCache,AudioTrackList,ChannelMergerNode,CryptoOperation,EventSource,FileReader,HTMLUnknownElement,IDBDatabase,IDBRequest,IDBTransaction,KeyOperation,MediaController,MessagePort,ModalWindow,Notification,SVGElementInstance,Screen,TextTrack,TextTrackCue,TextTrackList,WebSocket,WebSocketWorker,Worker,XMLHttpRequest,XMLHttpRequestEventTarget,XMLHttpRequestUpload"
+                            .split(",");
+                        for (t = 0; t < l.length; ++t) r[a = l[t]] && r[a].prototype && o(e, r[a]
+                            .prototype, n)
+                    }
+                }
+            }
+        }, function (r, e) {
+            function o(r, e) {
+                this.impl = r(e, this), this.options = e,
+                    function (r) {
+                        for (var e = function (r) {
+                                    return function () {
+                                        var e = Array.prototype.slice.call(arguments, 0);
+                                        if (this.impl[r]) return this.impl[r].apply(this.impl, e)
+                                    }
+                                }, o =
+                                "log,debug,info,warn,warning,error,critical,global,configure,handleUncaughtException,handleAnonymousErrors,handleUnhandledRejection,_createItem,wrap,loadFull,shimId,captureEvent,captureDomContentLoaded,captureLoad"
+                                .split(","), n = 0; n < o.length; n++) r[o[n]] = e(o[n])
+                    }(o.prototype)
+            }
+            o.prototype._swapAndProcessMessages = function (r, e) {
+                var o, n, t;
+                for (this.impl = r(this.options); o = e.shift();) n = o.method, t = o.args, this[n] &&
+                    "function" == typeof this[n] && ("captureDomContentLoaded" === n || "captureLoad" ===
+                        n ? this[n].apply(this, [t[0], o.ts]) : this[n].apply(this, t));
+                return this
+            }, r.exports = o
+        }, function (r, e) {
+            r.exports = function (r) {
+                return function (e) {
+                    if (!e && !window._rollbarInitialized) {
+                        for (var o, n, t = (r = r || {}).globalAlias || "Rollbar", a = window.rollbar,
+                                l = function (r) {
+                                    return new a(r)
+                                }, i = 0; o = window._rollbarShims[i++];) n || (n = o.handler), o
+                            .handler._swapAndProcessMessages(l, o.messages);
+                        window[t] = n, window._rollbarInitialized = !0
+                    }
+                }
+            }
+        }]);
+    </script>
+    <meta content='IE=Edge' http-equiv='X-UA-Compatible'>
+    <link rel="stylesheet" media="all"
+        href="style-1.css" />
+    <link rel="stylesheet" media="screen" href="style-2.css" />
+    <script type="adf064d97066fcb9b05c1528-text/javascript">
+        //<![CDATA[
+        window.gon = {};
+        gon.hs = {
+            "autoloadBeacon": false
+        };
+        gon.applications = {};
+        gon.current_user = {
+            "id": 200894,
+            "email": "irabulich@gmail.com",
+            "username": "user-7548ebeb4a1c8aba",
+            "created_at": "2019-01-02T02:09:16.317+02:00",
+            "text": "irabulich@gmail.com (user-7548ebeb4a1c8aba)",
+            "last_viewed_notification_id": null,
+            "full_name": "Irina Bulich",
+            "public_name": "Irina Bulich",
+            "url": "https://hexlet.io/u/user-7548ebeb4a1c8aba",
+            "can_use_paid_features": true,
+            "isGuest": false,
+            "can_send_emails": true,
+            "isMentor": null,
+            "paid_days_count": 26,
+            "current_company": null,
+            "current_company_url": null
+        };
+        gon.token = "QOXdWi0LjY24nQMWVJq5Hn365up+viZkxKHKREXJSLfMZUkxDYHssDCstaYNsOTcshVwByUvokq8w+rhjOMhhQ==";
+        gon.disqus_name = "hexletio";
+        gon.locale = "ru";
+        gon.rails_env = "production";
+        gon.analytics_events = "AnalyticsEvents";
+        gon.google = {
+            "analytics_key": "UA-1360700-51",
+            "optimize_key": "GTM-5QDVFPF"
+        };
+        gon.social_signin = null;
+        gon.subdomains = ["en.hexlet.io", "ru.hexlet.io"];
+        gon.notifications = [{
+            "id": 716881,
+            "message": "Ваше ревью для \u003cb\u003eМассив\u003c/b\u003e было создано",
+            "url": "/code_reviews/242659",
+            "human_created_at": "3 дня назад",
+            "icon": "\u003cspan class=\"fas fa-bicycle\"\u003e\u003c/span\u003e"
+        }, {
+            "id": 716879,
+            "message": "Ваше ревью для \u003cb\u003eМассив\u003c/b\u003e было создано",
+            "url": "/code_reviews/242659",
+            "human_created_at": "3 дня назад",
+            "icon": "\u003cspan class=\"fas fa-bicycle\"\u003e\u003c/span\u003e"
+        }];
+        gon.lesson = {
+            "id": 1628,
+            "slug": "pure-functions"
+        };
+        gon.course = {
+            "slug": "js-functions"
+        };
+        gon.topics = [{
+            "id": 40418,
+            "title": "Добрый вечер! Насколько хуже такое решение? Или сам метод определения простого числа тут не особо важен? https://ru.hexlet.io/code_reviews/241166 Спасибо!",
+            "creator": {
+                "id": 258546,
+                "public_name": "Denis",
+                "isRemoved": false,
+                "isMentor": null,
+                "can_use_paid_features": true,
+                "public_profile_enabled": null,
+                "public_profile_url": "/u/draught",
+                "avatar_img_url": "https://cdn2.hexlet.io/derivations/image/fill/290/290/eyJpZCI6ImJlZDA0Mjg4NDI0YWNhMTNkMjlhMzFjMDlkNjE5OGY5Iiwic3RvcmFnZSI6InN0b3JlIn0?signature=befd9baba34ef59302d827bec6fbe19ad8e56ed7e9bce9c0f9c5a13d32c044d1",
+                "has_received_mentor_response_at_least_once": true
+            },
+            "communitable": {
+                "id": 1628,
+                "slug": "pure-functions",
+                "name": "Чистые функции",
+                "location": "/courses/js-functions/lessons/pure-functions/theory_unit",
+                "link": "Курс «\u003ca href=\"https://ru.hexlet.io/courses/js-functions\"\u003eJS: Функции\u003c/a\u003e»\u003cbr\u003e\u0026#8627; Урок «\u003ca href=\"/courses/js-functions/lessons/pure-functions/theory_unit\"\u003eЧистые функции\u003c/a\u003e» "
+            },
+            "created_at": "6 дней назад",
+            "location": "/topics/40418",
+            "has_solutions": true,
+            "can_show_mentor_info": true,
+            "state": "active",
+            "can_destroy": false,
+            "can_like": true,
+            "can_update": false,
+            "can_subscribe": true,
+            "kind": "question",
+            "likes": [],
+            "comments": [{
+                "id": 88322,
+                "body": "Приветствую, Денис!\n\nПо заданию функция определения простого числа должна возвращать логическое значение: `true` или `false`. У вас это цифра 2. Взгляните на код с точки зрения другого программиста. Очевидно, что это не лучшее решение. :)",
+                "creator": {
+                    "id": 226258,
+                    "public_name": "Роман Ашиков",
+                    "isRemoved": false,
+                    "isMentor": true,
+                    "can_use_paid_features": true,
+                    "public_profile_enabled": null,
+                    "public_profile_url": "/u/lastnorf",
+                    "avatar_img_url": "https://cdn2.hexlet.io/derivations/image/fill/290/290/eyJpZCI6ImE3NTc3N2YwZTZiOGIwM2IwMGNkYTUyMDlmOTlhYzIzLmpwZyIsInN0b3JhZ2UiOiJzdG9yZSJ9?signature=036cc6f734cafc8eb36de26dd92588086650ced13a6c68589c57c829af5cba74",
+                    "has_received_mentor_response_at_least_once": true
+                },
+                "created_at": "6 дней назад",
+                "solution": true,
+                "can_destroy": false,
+                "can_like": true,
+                "can_update": false,
+                "can_mark_as_solution": false,
+                "likes": []
+            }],
+            "useful": false,
+            "subscribers": [{
+                "id": 82314,
+                "user_id": 226258
+            }, {
+                "id": 82283,
+                "user_id": 258546
+            }],
+            "mentor": {
+                "id": 65,
+                "user_id": 226258,
+                "full_name": "Роман Ашиков",
+                "username": "lastnorf"
+            }
+        }, {
+            "id": 40147,
+            "title": "Приветсвую!\nЯ что-то [\"тупанул\"](https://ru.hexlet.io/code_reviews/238119?submission_id=301314) и в детерминированной функции сразу возвращал 'yes' || 'no'. Правильно ли я понимаю это не хорошо, т.к. эту функцию мы можем тоже экспортировать и  использовать где-то ещё и нам это будет не удобно ?\n\n\n\n\n",
+            "creator": {
+                "id": 269707,
+                "public_name": "Сергей Климов",
+                "isRemoved": false,
+                "isMentor": null,
+                "can_use_paid_features": true,
+                "public_profile_enabled": null,
+                "public_profile_url": "/u/w1r3d",
+                "avatar_img_url": "https://cdn2.hexlet.io/assets/team/you-0d6975dd3165f8174f242a784f3beb84835b60d93e446821299ac562e4cff9c3.jpg",
+                "has_received_mentor_response_at_least_once": true
+            },
+            "communitable": {
+                "id": 1628,
+                "slug": "pure-functions",
+                "name": "Чистые функции",
+                "location": "/courses/js-functions/lessons/pure-functions/theory_unit",
+                "link": "Курс «\u003ca href=\"https://ru.hexlet.io/courses/js-functions\"\u003eJS: Функции\u003c/a\u003e»\u003cbr\u003e\u0026#8627; Урок «\u003ca href=\"/courses/js-functions/lessons/pure-functions/theory_unit\"\u003eЧистые функции\u003c/a\u003e» "
+            },
+            "created_at": "27 марта 2020",
+            "location": "/topics/40147",
+            "has_solutions": true,
+            "can_show_mentor_info": true,
+            "state": "active",
+            "can_destroy": false,
+            "can_like": true,
+            "can_update": false,
+            "can_subscribe": true,
+            "kind": "question",
+            "likes": [],
+            "comments": [{
+                "id": 87888,
+                "body": "Приветствую, Сергей!\n\nisPrime - это должна быть функция-предикат (возвращает логическое значение). В этом случае она выполняет конкретно одну задачу - проверяет число на простоту. А интерпретация результата: получение значений 'yes' || 'no' это уже не её зона ответственности. Но на детерминированность функции это никак не повлияет.",
+                "creator": {
+                    "id": 212236,
+                    "public_name": "Станислав Дзисяк",
+                    "isRemoved": false,
+                    "isMentor": true,
+                    "can_use_paid_features": false,
+                    "public_profile_enabled": null,
+                    "public_profile_url": "/u/corsicanec82",
+                    "avatar_img_url": "https://cdn2.hexlet.io/derivations/image/fill/290/290/eyJpZCI6IjRkYTdmNmU5NDQ5NmM5M2ZjNmMzYmIyMGE1MDBiOTM1LmpwZyIsInN0b3JhZ2UiOiJzdG9yZSJ9?signature=cfdce2951ae6677e7de5510234c403862d156b38723e651d9a8444723f305ed7",
+                    "has_received_mentor_response_at_least_once": true
+                },
+                "created_at": "27 марта 2020",
+                "solution": true,
+                "can_destroy": false,
+                "can_like": true,
+                "can_update": false,
+                "can_mark_as_solution": false,
+                "likes": [{
+                    "id": 17815,
+                    "user_id": 269707,
+                    "comment_id": 87888
+                }]
+            }],
+            "useful": false,
+            "subscribers": [{
+                "id": 81818,
+                "user_id": 212236
+            }, {
+                "id": 81764,
+                "user_id": 269707
+            }],
+            "mentor": {
+                "id": 60,
+                "user_id": 212236,
+                "full_name": "Станислав Дзисяк",
+                "username": "corsicanec82"
+            }
+        }, {
+            "id": 39284,
+            "title": "Здравствуйте. Не понимаю, почему у меня часто тесты падают с ошибкой 'is not a function' как например здесь https://ru.hexlet.io/code_reviews/227307 - export default тоже пробовал\nЯ вроде всегда все плюс-минус делаю одинаково. И чаще этой ошибки нет чем есть. В предыдущих заданиях я как-то методом тыка ушел от нее просто поставив слово export вначале каждой функции\n```\nexport const functionName = function(arg) {}\n```\nтак и не понял тогда в чем разница",
+            "creator": {
+                "id": 25421,
+                "public_name": "pttrulez",
+                "isRemoved": false,
+                "isMentor": null,
+                "can_use_paid_features": true,
+                "public_profile_enabled": null,
+                "public_profile_url": "/u/pttrulez",
+                "avatar_img_url": "https://cdn2.hexlet.io/derivations/image/fill/290/290/eyJpZCI6ImRkZmFjOWU0NDc4YzdkOTA1MWIwZGNiNjU5YmU0YzViLmpwZWciLCJzdG9yYWdlIjoic3RvcmUifQ?signature=9f4345aa87b2c9a6fb74f198cf7ff67e2528b3671db25de9051a73f8de520aa2",
+                "has_received_mentor_response_at_least_once": true
+            },
+            "communitable": {
+                "id": 1628,
+                "slug": "pure-functions",
+                "name": "Чистые функции",
+                "location": "/courses/js-functions/lessons/pure-functions/theory_unit",
+                "link": "Курс «\u003ca href=\"https://ru.hexlet.io/courses/js-functions\"\u003eJS: Функции\u003c/a\u003e»\u003cbr\u003e\u0026#8627; Урок «\u003ca href=\"/courses/js-functions/lessons/pure-functions/theory_unit\"\u003eЧистые функции\u003c/a\u003e» "
+            },
+            "created_at": "08 марта 2020",
+            "location": "/topics/39284",
+            "has_solutions": null,
+            "can_show_mentor_info": true,
+            "state": "active",
+            "can_destroy": false,
+            "can_like": true,
+            "can_update": false,
+            "can_subscribe": true,
+            "kind": "question",
+            "likes": [],
+            "comments": [{
+                "id": 86022,
+                "body": "**pttrulez**, приветствую!\n\nОбращайте внимание на то какой экспорт функций необходимо использовать в конкретном упражнении. В данном упражнении по условию задачи необходимо реализовать и **экспортировать по умолчанию** функцию sayPrimeOrNot, а не именованный экспорт. Если есть необходимость повторите урок \"[Модули](https://ru.hexlet.io/courses/introduction_to_programming/lessons/modules/theory_unit)\" из курса \"Введение в программирование\".",
+                "creator": {
+                    "id": 212236,
+                    "public_name": "Станислав Дзисяк",
+                    "isRemoved": false,
+                    "isMentor": true,
+                    "can_use_paid_features": false,
+                    "public_profile_enabled": null,
+                    "public_profile_url": "/u/corsicanec82",
+                    "avatar_img_url": "https://cdn2.hexlet.io/derivations/image/fill/290/290/eyJpZCI6IjRkYTdmNmU5NDQ5NmM5M2ZjNmMzYmIyMGE1MDBiOTM1LmpwZyIsInN0b3JhZ2UiOiJzdG9yZSJ9?signature=cfdce2951ae6677e7de5510234c403862d156b38723e651d9a8444723f305ed7",
+                    "has_received_mentor_response_at_least_once": true
+                },
+                "created_at": "09 марта 2020",
+                "solution": null,
+                "can_destroy": false,
+                "can_like": true,
+                "can_update": false,
+                "can_mark_as_solution": false,
+                "likes": []
+            }, {
+                "id": 86053,
+                "body": "я только не понял почему при строчке \n```\nexport default { sayPrimeOrNot, isSimple }\n``` \nвыдавало ошибку, а когда убрал isSimple функцию и оставил просто\n\nexport default sayPrimeOrNot\n```\nто ошибка пропала ",
+                "creator": {
+                    "id": 25421,
+                    "public_name": "pttrulez",
+                    "isRemoved": false,
+                    "isMentor": null,
+                    "can_use_paid_features": true,
+                    "public_profile_enabled": null,
+                    "public_profile_url": "/u/pttrulez",
+                    "avatar_img_url": "https://cdn2.hexlet.io/derivations/image/fill/290/290/eyJpZCI6ImRkZmFjOWU0NDc4YzdkOTA1MWIwZGNiNjU5YmU0YzViLmpwZWciLCJzdG9yYWdlIjoic3RvcmUifQ?signature=9f4345aa87b2c9a6fb74f198cf7ff67e2528b3671db25de9051a73f8de520aa2",
+                    "has_received_mentor_response_at_least_once": true
+                },
+                "created_at": "09 марта 2020",
+                "solution": null,
+                "can_destroy": false,
+                "can_like": true,
+                "can_update": false,
+                "can_mark_as_solution": false,
+                "likes": []
+            }, {
+                "id": 86054,
+                "body": "**pttrulez**,\n\nпри такой записи `export default { sayPrimeOrNot, isSimple }` экспортируется по умолчанию объект { ... }, у которого есть два свойства с ключами sayPrimeOrNot и isSimple. А так  `export default sayPrimeOrNot` экспортируется по умолчанию функция sayPrimeOrNot.",
+                "creator": {
+                    "id": 212236,
+                    "public_name": "Станислав Дзисяк",
+                    "isRemoved": false,
+                    "isMentor": true,
+                    "can_use_paid_features": false,
+                    "public_profile_enabled": null,
+                    "public_profile_url": "/u/corsicanec82",
+                    "avatar_img_url": "https://cdn2.hexlet.io/derivations/image/fill/290/290/eyJpZCI6IjRkYTdmNmU5NDQ5NmM5M2ZjNmMzYmIyMGE1MDBiOTM1LmpwZyIsInN0b3JhZ2UiOiJzdG9yZSJ9?signature=cfdce2951ae6677e7de5510234c403862d156b38723e651d9a8444723f305ed7",
+                    "has_received_mentor_response_at_least_once": true
+                },
+                "created_at": "09 марта 2020",
+                "solution": null,
+                "can_destroy": false,
+                "can_like": true,
+                "can_update": false,
+                "can_mark_as_solution": false,
+                "likes": []
+            }, {
+                "id": 86074,
+                "body": "А если бы я захотел экспортировать по-умолчанию две функции то как бы я должен был действовать? Две строчки\n```\nexport default sayPrimeOrNot\nexport default isSimple\n```\n\nтак ?",
+                "creator": {
+                    "id": 25421,
+                    "public_name": "pttrulez",
+                    "isRemoved": false,
+                    "isMentor": null,
+                    "can_use_paid_features": true,
+                    "public_profile_enabled": null,
+                    "public_profile_url": "/u/pttrulez",
+                    "avatar_img_url": "https://cdn2.hexlet.io/derivations/image/fill/290/290/eyJpZCI6ImRkZmFjOWU0NDc4YzdkOTA1MWIwZGNiNjU5YmU0YzViLmpwZWciLCJzdG9yYWdlIjoic3RvcmUifQ?signature=9f4345aa87b2c9a6fb74f198cf7ff67e2528b3671db25de9051a73f8de520aa2",
+                    "has_received_mentor_response_at_least_once": true
+                },
+                "created_at": "09 марта 2020",
+                "solution": null,
+                "can_destroy": false,
+                "can_like": true,
+                "can_update": false,
+                "can_mark_as_solution": false,
+                "likes": []
+            }, {
+                "id": 86078,
+                "body": "**pttrulez**,\n\nНет, так нельзя делать. Повторите урок \"[Модули](https://ru.hexlet.io/courses/introduction_to_programming/lessons/modules/theory_unit)\" из курса \"Введение в программирование\", по моей рекомендации. В нём есть ответы на ваши вопросы.",
+                "creator": {
+                    "id": 212236,
+                    "public_name": "Станислав Дзисяк",
+                    "isRemoved": false,
+                    "isMentor": true,
+                    "can_use_paid_features": false,
+                    "public_profile_enabled": null,
+                    "public_profile_url": "/u/corsicanec82",
+                    "avatar_img_url": "https://cdn2.hexlet.io/derivations/image/fill/290/290/eyJpZCI6IjRkYTdmNmU5NDQ5NmM5M2ZjNmMzYmIyMGE1MDBiOTM1LmpwZyIsInN0b3JhZ2UiOiJzdG9yZSJ9?signature=cfdce2951ae6677e7de5510234c403862d156b38723e651d9a8444723f305ed7",
+                    "has_received_mentor_response_at_least_once": true
+                },
+                "created_at": "09 марта 2020",
+                "solution": null,
+                "can_destroy": false,
+                "can_like": true,
+                "can_update": false,
+                "can_mark_as_solution": false,
+                "likes": [{
+                    "id": 17793,
+                    "user_id": 269707,
+                    "comment_id": 86078
+                }, {
+                    "id": 17586,
+                    "user_id": 257584,
+                    "comment_id": 86078
+                }]
+            }],
+            "useful": false,
+            "subscribers": [{
+                "id": 79920,
+                "user_id": 212236
+            }, {
+                "id": 79831,
+                "user_id": 25421
+            }],
+            "mentor": {
+                "id": 60,
+                "user_id": 212236,
+                "full_name": "Станислав Дзисяк",
+                "username": "corsicanec82"
+            }
+        }, {
+            "id": 38825,
+            "title": "Не могу понять в чем проблема https://ru.hexlet.io/code_reviews/221999 . Help me.",
+            "creator": {
+                "id": 268101,
+                "public_name": "Евгений",
+                "isRemoved": false,
+                "isMentor": null,
+                "can_use_paid_features": true,
+                "public_profile_enabled": null,
+                "public_profile_url": "/u/zekazny",
+                "avatar_img_url": "https://cdn2.hexlet.io/derivations/image/fill/290/290/eyJpZCI6ImNmMDBkMGQzYWU3Y2VkOTExZDBiNzg4MGE1MTMxN2E3LmpwZyIsInN0b3JhZ2UiOiJzdG9yZSJ9?signature=5c750a3583c11a4b5613af5502110353d7836acfb2911925fc12b006e2cb3963",
+                "has_received_mentor_response_at_least_once": true
+            },
+            "communitable": {
+                "id": 1628,
+                "slug": "pure-functions",
+                "name": "Чистые функции",
+                "location": "/courses/js-functions/lessons/pure-functions/theory_unit",
+                "link": "Курс «\u003ca href=\"https://ru.hexlet.io/courses/js-functions\"\u003eJS: Функции\u003c/a\u003e»\u003cbr\u003e\u0026#8627; Урок «\u003ca href=\"/courses/js-functions/lessons/pure-functions/theory_unit\"\u003eЧистые функции\u003c/a\u003e» "
+            },
+            "created_at": "28 февраля 2020",
+            "location": "/topics/38825",
+            "has_solutions": true,
+            "can_show_mentor_info": true,
+            "state": "active",
+            "can_destroy": false,
+            "can_like": true,
+            "can_update": false,
+            "can_subscribe": true,
+            "kind": "question",
+            "likes": [],
+            "comments": [{
+                "id": 84896,
+                "body": "Добрый день, Евгений! Вы описали функцию **isPrime**, но не используете её в функции **sayPrimeOrNot**. \n\nДополнительно можно оптимизировать верхнюю границу для проверки числа на простоту в функции **isPrime**.\n\nНадеюсь мой ответ был полезен. :)",
+                "creator": {
+                    "id": 226258,
+                    "public_name": "Роман Ашиков",
+                    "isRemoved": false,
+                    "isMentor": true,
+                    "can_use_paid_features": true,
+                    "public_profile_enabled": null,
+                    "public_profile_url": "/u/lastnorf",
+                    "avatar_img_url": "https://cdn2.hexlet.io/derivations/image/fill/290/290/eyJpZCI6ImE3NTc3N2YwZTZiOGIwM2IwMGNkYTUyMDlmOTlhYzIzLmpwZyIsInN0b3JhZ2UiOiJzdG9yZSJ9?signature=036cc6f734cafc8eb36de26dd92588086650ced13a6c68589c57c829af5cba74",
+                    "has_received_mentor_response_at_least_once": true
+                },
+                "created_at": "28 февраля 2020",
+                "solution": true,
+                "can_destroy": false,
+                "can_like": true,
+                "can_update": false,
+                "can_mark_as_solution": false,
+                "likes": []
+            }, {
+                "id": 84905,
+                "body": "Cпасибо за помощь) Какая же глупая ошибка)",
+                "creator": {
+                    "id": 268101,
+                    "public_name": "Евгений",
+                    "isRemoved": false,
+                    "isMentor": null,
+                    "can_use_paid_features": true,
+                    "public_profile_enabled": null,
+                    "public_profile_url": "/u/zekazny",
+                    "avatar_img_url": "https://cdn2.hexlet.io/derivations/image/fill/290/290/eyJpZCI6ImNmMDBkMGQzYWU3Y2VkOTExZDBiNzg4MGE1MTMxN2E3LmpwZyIsInN0b3JhZ2UiOiJzdG9yZSJ9?signature=5c750a3583c11a4b5613af5502110353d7836acfb2911925fc12b006e2cb3963",
+                    "has_received_mentor_response_at_least_once": true
+                },
+                "created_at": "28 февраля 2020",
+                "solution": null,
+                "can_destroy": false,
+                "can_like": true,
+                "can_update": false,
+                "can_mark_as_solution": false,
+                "likes": [{
+                    "id": 17109,
+                    "user_id": 226258,
+                    "comment_id": 84905
+                }]
+            }],
+            "useful": false,
+            "subscribers": [{
+                "id": 78844,
+                "user_id": 226258
+            }, {
+                "id": 78835,
+                "user_id": 268101
+            }],
+            "mentor": null
+        }, {
+            "id": 38754,
+            "title": "Технически данное решение прошло, однако она определенно в первой функции отличается от решения учителя(логику которого я к сожалению не понял). Значит ли это, что мое решение в данном случае может привести к ошибке в тех или иных ситуациях?  [Ревью](https://ru.hexlet.io/code_reviews/221069)",
+            "creator": {
+                "id": 256288,
+                "public_name": "Теймур Еникеев",
+                "isRemoved": false,
+                "isMentor": null,
+                "can_use_paid_features": true,
+                "public_profile_enabled": null,
+                "public_profile_url": "/u/kliod",
+                "avatar_img_url": "https://cdn2.hexlet.io/assets/team/you-0d6975dd3165f8174f242a784f3beb84835b60d93e446821299ac562e4cff9c3.jpg",
+                "has_received_mentor_response_at_least_once": true
+            },
+            "communitable": {
+                "id": 1628,
+                "slug": "pure-functions",
+                "name": "Чистые функции",
+                "location": "/courses/js-functions/lessons/pure-functions/theory_unit",
+                "link": "Курс «\u003ca href=\"https://ru.hexlet.io/courses/js-functions\"\u003eJS: Функции\u003c/a\u003e»\u003cbr\u003e\u0026#8627; Урок «\u003ca href=\"/courses/js-functions/lessons/pure-functions/theory_unit\"\u003eЧистые функции\u003c/a\u003e» "
+            },
+            "created_at": "26 февраля 2020",
+            "location": "/topics/38754",
+            "has_solutions": true,
+            "can_show_mentor_info": true,
+            "state": "active",
+            "can_destroy": false,
+            "can_like": true,
+            "can_update": false,
+            "can_subscribe": true,
+            "kind": "question",
+            "likes": [],
+            "comments": [{
+                "id": 84734,
+                "body": "Приветствую, **Теймур Еникеев**.\n\n1. По определению, как известно, число является простым, если оно делится без остатка только на само себя или на единицу. Именно это условие проверяется в цикле в решении учителя. Если есть ещё какое-либо число на которое можно разделить без остатка, то дальнейшие проверки бессмысленны. Нет необходимости в дополнительных переменных, присутствующих в вашем решении.\n2. Обратите внимание на первое условие в решении учителя - guard expression.\n3. В функции sayPrimeOrNot, опять же, переменная не нужна. В решении здесь используется тернарный оператор. Он часто встречается.\n\nИ привыкайте заглядывать в линтер. Он подскажет, как правильно оформить код. Следует придерживаться стандартов.\n",
+                "creator": {
+                    "id": 227217,
+                    "public_name": "Павел Егоров",
+                    "isRemoved": false,
+                    "isMentor": null,
+                    "can_use_paid_features": true,
+                    "public_profile_enabled": null,
+                    "public_profile_url": "/u/mrfsp",
+                    "avatar_img_url": "https://cdn2.hexlet.io/derivations/image/fill/290/290/eyJpZCI6IjRjMTU4NjQ1ZTg2MjI1MTBlMmMwZTUwZWYyZmY0YmNiLmpwZyIsInN0b3JhZ2UiOiJzdG9yZSJ9?signature=bd7382105cb4ac9c22700735697eacf2dea8a8c282d435e9ea06714262ec6ab9",
+                    "has_received_mentor_response_at_least_once": true
+                },
+                "created_at": "26 февраля 2020",
+                "solution": true,
+                "can_destroy": false,
+                "can_like": true,
+                "can_update": false,
+                "can_mark_as_solution": false,
+                "likes": [{
+                    "id": 17096,
+                    "user_id": 256288,
+                    "comment_id": 84734
+                }]
+            }, {
+                "id": 84792,
+                "body": "**Павел Егоров**, принял, учу. Гран мерси за уделенное внимание.",
+                "creator": {
+                    "id": 256288,
+                    "public_name": "Теймур Еникеев",
+                    "isRemoved": false,
+                    "isMentor": null,
+                    "can_use_paid_features": true,
+                    "public_profile_enabled": null,
+                    "public_profile_url": "/u/kliod",
+                    "avatar_img_url": "https://cdn2.hexlet.io/assets/team/you-0d6975dd3165f8174f242a784f3beb84835b60d93e446821299ac562e4cff9c3.jpg",
+                    "has_received_mentor_response_at_least_once": true
+                },
+                "created_at": "27 февраля 2020",
+                "solution": null,
+                "can_destroy": false,
+                "can_like": true,
+                "can_update": false,
+                "can_mark_as_solution": false,
+                "likes": []
+            }, {
+                "id": 84798,
+                "body": "**Теймур Еникеев**, на здоровье!",
+                "creator": {
+                    "id": 227217,
+                    "public_name": "Павел Егоров",
+                    "isRemoved": false,
+                    "isMentor": null,
+                    "can_use_paid_features": true,
+                    "public_profile_enabled": null,
+                    "public_profile_url": "/u/mrfsp",
+                    "avatar_img_url": "https://cdn2.hexlet.io/derivations/image/fill/290/290/eyJpZCI6IjRjMTU4NjQ1ZTg2MjI1MTBlMmMwZTUwZWYyZmY0YmNiLmpwZyIsInN0b3JhZ2UiOiJzdG9yZSJ9?signature=bd7382105cb4ac9c22700735697eacf2dea8a8c282d435e9ea06714262ec6ab9",
+                    "has_received_mentor_response_at_least_once": true
+                },
+                "created_at": "27 февраля 2020",
+                "solution": null,
+                "can_destroy": false,
+                "can_like": true,
+                "can_update": false,
+                "can_mark_as_solution": false,
+                "likes": []
+            }, {
+                "id": 84865,
+                "body": "Теймур, приветствую!  \nЕсли вам помог ответ Павла, стоит отметить его \"как решение\", это отличный способ поблагодарить за помощь, и другим пользователям будет проще найти ответ на свой вопрос :)",
+                "creator": {
+                    "id": 231814,
+                    "public_name": "Roman Kozlov",
+                    "isRemoved": false,
+                    "isMentor": true,
+                    "can_use_paid_features": false,
+                    "public_profile_enabled": null,
+                    "public_profile_url": "/u/rkozlov95",
+                    "avatar_img_url": "https://cdn2.hexlet.io/derivations/image/fill/290/290/eyJpZCI6IjE4NjkzNTk1MTRkOWE1ZTgxYWYwNGZkODc1NmVlYjljLmpwZyIsInN0b3JhZ2UiOiJzdG9yZSJ9?signature=be9caca9a9994d6df3521249c1418b600bda2bfebf242a5f618d0adfb18c0f93",
+                    "has_received_mentor_response_at_least_once": true
+                },
+                "created_at": "27 февраля 2020",
+                "solution": null,
+                "can_destroy": false,
+                "can_like": true,
+                "can_update": false,
+                "can_mark_as_solution": false,
+                "likes": [{
+                    "id": 17099,
+                    "user_id": 256288,
+                    "comment_id": 84865
+                }]
+            }, {
+                "id": 84866,
+                "body": "**Roman Kozlov**, так и сделаю!",
+                "creator": {
+                    "id": 256288,
+                    "public_name": "Теймур Еникеев",
+                    "isRemoved": false,
+                    "isMentor": null,
+                    "can_use_paid_features": true,
+                    "public_profile_enabled": null,
+                    "public_profile_url": "/u/kliod",
+                    "avatar_img_url": "https://cdn2.hexlet.io/assets/team/you-0d6975dd3165f8174f242a784f3beb84835b60d93e446821299ac562e4cff9c3.jpg",
+                    "has_received_mentor_response_at_least_once": true
+                },
+                "created_at": "27 февраля 2020",
+                "solution": null,
+                "can_destroy": false,
+                "can_like": true,
+                "can_update": false,
+                "can_mark_as_solution": false,
+                "likes": []
+            }],
+            "useful": false,
+            "subscribers": [{
+                "id": 78810,
+                "user_id": 231814
+            }, {
+                "id": 78682,
+                "user_id": 227217
+            }, {
+                "id": 78676,
+                "user_id": 256288
+            }],
+            "mentor": {
+                "id": 63,
+                "user_id": 231814,
+                "full_name": "Роман Козлов",
+                "username": "rkozlov95"
+            }
+        }, {
+            "id": 38552,
+            "title": "https://ru.hexlet.io/code_reviews/218387 Добрый день, почему тест падает?\n",
+            "creator": {
+                "id": 262229,
+                "public_name": "Даниил Каминский",
+                "isRemoved": false,
+                "isMentor": null,
+                "can_use_paid_features": true,
+                "public_profile_enabled": null,
+                "public_profile_url": "/u/user-99c8c426e2a1c9eb",
+                "avatar_img_url": "https://cdn2.hexlet.io/assets/team/you-0d6975dd3165f8174f242a784f3beb84835b60d93e446821299ac562e4cff9c3.jpg",
+                "has_received_mentor_response_at_least_once": true
+            },
+            "communitable": {
+                "id": 1628,
+                "slug": "pure-functions",
+                "name": "Чистые функции",
+                "location": "/courses/js-functions/lessons/pure-functions/theory_unit",
+                "link": "Курс «\u003ca href=\"https://ru.hexlet.io/courses/js-functions\"\u003eJS: Функции\u003c/a\u003e»\u003cbr\u003e\u0026#8627; Урок «\u003ca href=\"/courses/js-functions/lessons/pure-functions/theory_unit\"\u003eЧистые функции\u003c/a\u003e» "
+            },
+            "created_at": "21 февраля 2020",
+            "location": "/topics/38552",
+            "has_solutions": true,
+            "can_show_mentor_info": true,
+            "state": "active",
+            "can_destroy": false,
+            "can_like": true,
+            "can_update": false,
+            "can_subscribe": true,
+            "kind": "question",
+            "likes": [],
+            "comments": [{
+                "id": 84241,
+                "body": "**Даниил Каминский**, Добрый день, 1 - это не простое число, а у вас выходит простое) Надо подправить условие",
+                "creator": {
+                    "id": 233479,
+                    "public_name": "Vasiliy Kudinev",
+                    "isRemoved": false,
+                    "isMentor": null,
+                    "can_use_paid_features": true,
+                    "public_profile_enabled": null,
+                    "public_profile_url": "/u/morph",
+                    "avatar_img_url": "https://cdn2.hexlet.io/derivations/image/fill/290/290/eyJpZCI6IjNlYjlmY2M4ZTUyNGM0OTU5NzlmYjFlMmVhYWQ2YjFhLmpwZyIsInN0b3JhZ2UiOiJzdG9yZSJ9?signature=6d070b3c0cf98c14d8f1cba6e1533ae89bdf87d5538d443a65cbc2fb12e43ec2",
+                    "has_received_mentor_response_at_least_once": true
+                },
+                "created_at": "21 февраля 2020",
+                "solution": true,
+                "can_destroy": false,
+                "can_like": true,
+                "can_update": false,
+                "can_mark_as_solution": false,
+                "likes": []
+            }, {
+                "id": 84242,
+                "body": "дада, уже исправил)",
+                "creator": {
+                    "id": 262229,
+                    "public_name": "Даниил Каминский",
+                    "isRemoved": false,
+                    "isMentor": null,
+                    "can_use_paid_features": true,
+                    "public_profile_enabled": null,
+                    "public_profile_url": "/u/user-99c8c426e2a1c9eb",
+                    "avatar_img_url": "https://cdn2.hexlet.io/assets/team/you-0d6975dd3165f8174f242a784f3beb84835b60d93e446821299ac562e4cff9c3.jpg",
+                    "has_received_mentor_response_at_least_once": true
+                },
+                "created_at": "21 февраля 2020",
+                "solution": null,
+                "can_destroy": false,
+                "can_like": true,
+                "can_update": false,
+                "can_mark_as_solution": false,
+                "likes": []
+            }],
+            "useful": false,
+            "subscribers": [{
+                "id": 78203,
+                "user_id": 233479
+            }, {
+                "id": 78202,
+                "user_id": 262229
+            }],
+            "mentor": {
+                "id": 63,
+                "user_id": 231814,
+                "full_name": "Роман Козлов",
+                "username": "rkozlov95"
+            }
+        }, {
+            "id": 38462,
+            "title": "Ссылка на стандарты кодирования не работает. Ссылка на [вебархив](https://web.archive.org/web/20190125053402/https://github.com/leonidlebedev/javascript-airbnb#variables--unary-increment-decrement)",
+            "creator": {
+                "id": 174673,
+                "public_name": "Кирилл Григорьев",
+                "isRemoved": false,
+                "isMentor": null,
+                "can_use_paid_features": true,
+                "public_profile_enabled": null,
+                "public_profile_url": "/u/fori",
+                "avatar_img_url": "https://cdn2.hexlet.io/derivations/image/fill/290/290/eyJpZCI6ImY3ZTg5NmE4MTc5NTRjOGQwYTI5NmNmNmYwZTEyMzFiLmpwZyIsInN0b3JhZ2UiOiJzdG9yZSJ9?signature=28f6cb98178a59ec6f5c579f30eff5cd01fe3e98ec251f6b74311f707ba95af3",
+                "has_received_mentor_response_at_least_once": true
+            },
+            "communitable": {
+                "id": 1628,
+                "slug": "pure-functions",
+                "name": "Чистые функции",
+                "location": "/courses/js-functions/lessons/pure-functions/theory_unit",
+                "link": "Курс «\u003ca href=\"https://ru.hexlet.io/courses/js-functions\"\u003eJS: Функции\u003c/a\u003e»\u003cbr\u003e\u0026#8627; Урок «\u003ca href=\"/courses/js-functions/lessons/pure-functions/theory_unit\"\u003eЧистые функции\u003c/a\u003e» "
+            },
+            "created_at": "19 февраля 2020",
+            "location": "/topics/38462",
+            "has_solutions": null,
+            "can_show_mentor_info": false,
+            "state": "active",
+            "can_destroy": false,
+            "can_like": true,
+            "can_update": false,
+            "can_subscribe": true,
+            "kind": "question",
+            "likes": [],
+            "comments": [{
+                "id": 84066,
+                "body": "Приветствую!  \nПроверил, сейчас ссылка работает.",
+                "creator": {
+                    "id": 231814,
+                    "public_name": "Roman Kozlov",
+                    "isRemoved": false,
+                    "isMentor": true,
+                    "can_use_paid_features": false,
+                    "public_profile_enabled": null,
+                    "public_profile_url": "/u/rkozlov95",
+                    "avatar_img_url": "https://cdn2.hexlet.io/derivations/image/fill/290/290/eyJpZCI6IjE4NjkzNTk1MTRkOWE1ZTgxYWYwNGZkODc1NmVlYjljLmpwZyIsInN0b3JhZ2UiOiJzdG9yZSJ9?signature=be9caca9a9994d6df3521249c1418b600bda2bfebf242a5f618d0adfb18c0f93",
+                    "has_received_mentor_response_at_least_once": true
+                },
+                "created_at": "20 февраля 2020",
+                "solution": null,
+                "can_destroy": false,
+                "can_like": true,
+                "can_update": false,
+                "can_mark_as_solution": false,
+                "likes": []
+            }],
+            "useful": false,
+            "subscribers": [{
+                "id": 78060,
+                "user_id": 231814
+            }, {
+                "id": 78006,
+                "user_id": 174673
+            }],
+            "mentor": {
+                "id": 63,
+                "user_id": 231814,
+                "full_name": "Роман Козлов",
+                "username": "rkozlov95"
+            }
+        }, {
+            "id": 38334,
+            "title": "Я задание решила, но у меня тут вопрос. Я изначально сделала неправильное решение, которое почему-то работает. Я прям мозг сломала, не понимаю, почему выходят правильные решения (проверку этот код в задании прошел).  \n\n`//removed` \n \nflag по логике в цикле должен возвращаться 1",
+            "creator": {
+                "id": 164568,
+                "public_name": "Надежда Донецкая",
+                "isRemoved": false,
+                "isMentor": null,
+                "can_use_paid_features": true,
+                "public_profile_enabled": null,
+                "public_profile_url": "/u/nella",
+                "avatar_img_url": "https://cdn2.hexlet.io/assets/team/you-0d6975dd3165f8174f242a784f3beb84835b60d93e446821299ac562e4cff9c3.jpg",
+                "has_received_mentor_response_at_least_once": true
+            },
+            "communitable": {
+                "id": 1628,
+                "slug": "pure-functions",
+                "name": "Чистые функции",
+                "location": "/courses/js-functions/lessons/pure-functions/theory_unit",
+                "link": "Курс «\u003ca href=\"https://ru.hexlet.io/courses/js-functions\"\u003eJS: Функции\u003c/a\u003e»\u003cbr\u003e\u0026#8627; Урок «\u003ca href=\"/courses/js-functions/lessons/pure-functions/theory_unit\"\u003eЧистые функции\u003c/a\u003e» "
+            },
+            "created_at": "17 февраля 2020",
+            "location": "/topics/38334",
+            "has_solutions": true,
+            "can_show_mentor_info": false,
+            "state": "active",
+            "can_destroy": false,
+            "can_like": true,
+            "can_update": false,
+            "can_subscribe": true,
+            "kind": "question",
+            "likes": [],
+            "comments": [{
+                "id": 83712,
+                "body": "Надежда, добрый день!  \nПопробуйте посмотреть на [pythontutor](http://pythontutor.com/), как работает программа по шагам (подавайте на вход функции разные значения, простые числа и не простые).",
+                "creator": {
+                    "id": 231814,
+                    "public_name": "Roman Kozlov",
+                    "isRemoved": false,
+                    "isMentor": true,
+                    "can_use_paid_features": false,
+                    "public_profile_enabled": null,
+                    "public_profile_url": "/u/rkozlov95",
+                    "avatar_img_url": "https://cdn2.hexlet.io/derivations/image/fill/290/290/eyJpZCI6IjE4NjkzNTk1MTRkOWE1ZTgxYWYwNGZkODc1NmVlYjljLmpwZyIsInN0b3JhZ2UiOiJzdG9yZSJ9?signature=be9caca9a9994d6df3521249c1418b600bda2bfebf242a5f618d0adfb18c0f93",
+                    "has_received_mentor_response_at_least_once": true
+                },
+                "created_at": "17 февраля 2020",
+                "solution": true,
+                "can_destroy": false,
+                "can_like": true,
+                "can_update": false,
+                "can_mark_as_solution": false,
+                "likes": []
+            }, {
+                "id": 83779,
+                "body": "**Roman Kozlov**, да, уже посмотрела на Repl.it, что flag или число, или true. Я так понимаю, что код работает благодаря слабой типизации JS, иначе бы он ругался на тип при проверке. И да, к середине курса до меня дошло, что после return заканчивается работать ВСЯ функция, а не только то, что в {фигурных скобках} (именно поэтому у меня было такое сильное удивление).",
+                "creator": {
+                    "id": 164568,
+                    "public_name": "Надежда Донецкая",
+                    "isRemoved": false,
+                    "isMentor": null,
+                    "can_use_paid_features": true,
+                    "public_profile_enabled": null,
+                    "public_profile_url": "/u/nella",
+                    "avatar_img_url": "https://cdn2.hexlet.io/assets/team/you-0d6975dd3165f8174f242a784f3beb84835b60d93e446821299ac562e4cff9c3.jpg",
+                    "has_received_mentor_response_at_least_once": true
+                },
+                "created_at": "18 февраля 2020",
+                "solution": null,
+                "can_destroy": false,
+                "can_like": true,
+                "can_update": false,
+                "can_mark_as_solution": false,
+                "likes": []
+            }, {
+                "id": 83790,
+                "body": "Надежда, верно!  \nОтлично, что вы разобрались в этом вопросе :)",
+                "creator": {
+                    "id": 231814,
+                    "public_name": "Roman Kozlov",
+                    "isRemoved": false,
+                    "isMentor": true,
+                    "can_use_paid_features": false,
+                    "public_profile_enabled": null,
+                    "public_profile_url": "/u/rkozlov95",
+                    "avatar_img_url": "https://cdn2.hexlet.io/derivations/image/fill/290/290/eyJpZCI6IjE4NjkzNTk1MTRkOWE1ZTgxYWYwNGZkODc1NmVlYjljLmpwZyIsInN0b3JhZ2UiOiJzdG9yZSJ9?signature=be9caca9a9994d6df3521249c1418b600bda2bfebf242a5f618d0adfb18c0f93",
+                    "has_received_mentor_response_at_least_once": true
+                },
+                "created_at": "18 февраля 2020",
+                "solution": null,
+                "can_destroy": false,
+                "can_like": true,
+                "can_update": false,
+                "can_mark_as_solution": false,
+                "likes": []
+            }],
+            "useful": false,
+            "subscribers": [{
+                "id": 77745,
+                "user_id": 231814
+            }, {
+                "id": 77671,
+                "user_id": 164568
+            }],
+            "mentor": {
+                "id": 63,
+                "user_id": 231814,
+                "full_name": "Роман Козлов",
+                "username": "rkozlov95"
+            }
+        }, {
+            "id": 38205,
+            "title": "Заметил, что в обновленных курсах в решении учителя чаще используются циклы вместо рекурсии. С чем это связано? Из-за опасности переполнения стека задач или есть и другие причины? Используется ли в реальном продакшене такой подход: https://ru.hexlet.io/code_reviews/213951 , или лучше отдать предпочтение циклам там, где возможно обойтись без рекурсии? Спрашиваю из-за того, что нередко натыкался на критику использования рекурсии (конкретно для js) от специалистов-фронтендеров. Из последнего: https://www.youtube.com/watch?v=AKzrO5y0B2E (6:45).",
+            "creator": {
+                "id": 135527,
+                "public_name": "Антон  Древетняк",
+                "isRemoved": false,
+                "isMentor": null,
+                "can_use_paid_features": true,
+                "public_profile_enabled": null,
+                "public_profile_url": "/u/user-42c77e600f0bcb1a",
+                "avatar_img_url": "https://cdn2.hexlet.io/derivations/image/fill/290/290/eyJpZCI6IjM4Y2Q5YThjYzZjMDRhYzM0ZDg5YjcyOGRmZDBiM2MyIiwic3RvcmFnZSI6InN0b3JlIn0?signature=224c3729bded42a31af3a8fdd0a97ad2a2edb2370eeb0afc8cb176f56d9fa5f1",
+                "has_received_mentor_response_at_least_once": true
+            },
+            "communitable": {
+                "id": 1628,
+                "slug": "pure-functions",
+                "name": "Чистые функции",
+                "location": "/courses/js-functions/lessons/pure-functions/theory_unit",
+                "link": "Курс «\u003ca href=\"https://ru.hexlet.io/courses/js-functions\"\u003eJS: Функции\u003c/a\u003e»\u003cbr\u003e\u0026#8627; Урок «\u003ca href=\"/courses/js-functions/lessons/pure-functions/theory_unit\"\u003eЧистые функции\u003c/a\u003e» "
+            },
+            "created_at": "13 февраля 2020",
+            "location": "/topics/38205",
+            "has_solutions": null,
+            "can_show_mentor_info": true,
+            "state": "active",
+            "can_destroy": false,
+            "can_like": true,
+            "can_update": false,
+            "can_subscribe": true,
+            "kind": "question",
+            "likes": [],
+            "comments": [{
+                "id": 83434,
+                "body": "Привет. \n\nВ js стараются вместо циклов и рекурсий использовать функции высшего порядка. Просто вы пока с ними не знакомы по курсу. А вот в дальнейшем нужно будет использовать именно их.",
+                "creator": {
+                    "id": 244158,
+                    "public_name": "fessan",
+                    "isRemoved": false,
+                    "isMentor": null,
+                    "can_use_paid_features": true,
+                    "public_profile_enabled": null,
+                    "public_profile_url": "/u/fessan",
+                    "avatar_img_url": "https://cdn2.hexlet.io/derivations/image/fill/290/290/eyJpZCI6ImE5OTk4NjU4Mzc2YzgzMmU2OWU4ZDIyYTFlMmIwZWViLmpwZWciLCJzdG9yYWdlIjoic3RvcmUifQ?signature=489a78fce540cff6cf4cfcfc6f0b9064315560479bd91be234d735af4e6d3992",
+                    "has_received_mentor_response_at_least_once": true
+                },
+                "created_at": "13 февраля 2020",
+                "solution": null,
+                "can_destroy": false,
+                "can_like": true,
+                "can_update": false,
+                "can_mark_as_solution": false,
+                "likes": []
+            }, {
+                "id": 83466,
+                "body": "Новые курсы стали ближе к жизни :)",
+                "creator": {
+                    "id": 5174,
+                    "public_name": "Сергей К.",
+                    "isRemoved": false,
+                    "isMentor": true,
+                    "can_use_paid_features": false,
+                    "public_profile_enabled": null,
+                    "public_profile_url": "/u/ck",
+                    "avatar_img_url": "https://cdn2.hexlet.io/derivations/image/fill/290/290/eyJpZCI6ImI3MjFiZDk3ZjAzYWMyYTlhMTZjMTc5NTE5M2FlYmQwIiwic3RvcmFnZSI6InN0b3JlIn0?signature=a38c848c33e1ff0dc15f29dd6c4d8c8315e02ec3d0f52aa5fa3489dee64607c5",
+                    "has_received_mentor_response_at_least_once": true
+                },
+                "created_at": "14 февраля 2020",
+                "solution": null,
+                "can_destroy": false,
+                "can_like": true,
+                "can_update": false,
+                "can_mark_as_solution": false,
+                "likes": []
+            }, {
+                "id": 83486,
+                "body": "**fessan**, согласен, map/filter/reduce - наше всё), но я имел в виду те нечастые ситуации когда использовать их было бы не рационально, наподобие этой задачи. Ведь вряд ли кто-нибудь станет преобразовывать число n в массив [0..n/2] и редюсить его, только для того, чтобы выяснить является ли оно простым",
+                "creator": {
+                    "id": 135527,
+                    "public_name": "Антон  Древетняк",
+                    "isRemoved": false,
+                    "isMentor": null,
+                    "can_use_paid_features": true,
+                    "public_profile_enabled": null,
+                    "public_profile_url": "/u/user-42c77e600f0bcb1a",
+                    "avatar_img_url": "https://cdn2.hexlet.io/derivations/image/fill/290/290/eyJpZCI6IjM4Y2Q5YThjYzZjMDRhYzM0ZDg5YjcyOGRmZDBiM2MyIiwic3RvcmFnZSI6InN0b3JlIn0?signature=224c3729bded42a31af3a8fdd0a97ad2a2edb2370eeb0afc8cb176f56d9fa5f1",
+                    "has_received_mentor_response_at_least_once": true
+                },
+                "created_at": "14 февраля 2020",
+                "solution": null,
+                "can_destroy": false,
+                "can_like": true,
+                "can_update": false,
+                "can_mark_as_solution": false,
+                "likes": []
+            }],
+            "useful": false,
+            "subscribers": [{
+                "id": 77474,
+                "user_id": 5174
+            }, {
+                "id": 77449,
+                "user_id": 244158
+            }, {
+                "id": 77432,
+                "user_id": 135527
+            }],
+            "mentor": {
+                "id": 54,
+                "user_id": 5174,
+                "full_name": "Сергей Карпук",
+                "username": "ck"
+            }
+        }, {
+            "id": 37876,
+            "title": "Здравствуйте! Такая же проблема как здесь: https://ru.hexlet.io/topics/35779\nМоё ревью: https://ru.hexlet.io/code_reviews/209787\n\u003e Решение не проходит тесты, потому что не выполнено условие задачи, перечитайте, что должна делать функция sayPrimeOrNot.\n\n\n\u003e sayPrimeOrNot(5); // 'yes'\n\u003e sayPrimeOrNot(4); // 'no'\n\nНо у меня функция ведь как раз и принимает число и возращает 'yes'/'no', что показывает отладка.",
+            "creator": {
+                "id": 174421,
+                "public_name": "Юлия",
+                "isRemoved": false,
+                "isMentor": null,
+                "can_use_paid_features": true,
+                "public_profile_enabled": null,
+                "public_profile_url": "/u/yubet",
+                "avatar_img_url": "https://cdn2.hexlet.io/derivations/image/fill/290/290/eyJpZCI6ImIwYTZlNTExNmQ2MDczODQwMGRiYjQwNGMzMmVhYmJlLmpwZyIsInN0b3JhZ2UiOiJzdG9yZSJ9?signature=17bebef225ac6105944374fc1273b76ea78ea9ab7a62b82e305e19c6d6bec179",
+                "has_received_mentor_response_at_least_once": true
+            },
+            "communitable": {
+                "id": 1628,
+                "slug": "pure-functions",
+                "name": "Чистые функции",
+                "location": "/courses/js-functions/lessons/pure-functions/theory_unit",
+                "link": "Курс «\u003ca href=\"https://ru.hexlet.io/courses/js-functions\"\u003eJS: Функции\u003c/a\u003e»\u003cbr\u003e\u0026#8627; Урок «\u003ca href=\"/courses/js-functions/lessons/pure-functions/theory_unit\"\u003eЧистые функции\u003c/a\u003e» "
+            },
+            "created_at": "06 февраля 2020",
+            "location": "/topics/37876",
+            "has_solutions": true,
+            "can_show_mentor_info": false,
+            "state": "active",
+            "can_destroy": false,
+            "can_like": true,
+            "can_update": false,
+            "can_subscribe": true,
+            "kind": "question",
+            "likes": [],
+            "comments": [{
+                "id": 82760,
+                "body": "Здравствуйте, Юлия!\n\nВы правы, проблема такая же, поэтому и рекомендация будет такой же — перечитайте ещё раз условие задачи :)",
+                "creator": {
+                    "id": 130487,
+                    "public_name": "Kirill Chertkov",
+                    "isRemoved": false,
+                    "isMentor": true,
+                    "can_use_paid_features": false,
+                    "public_profile_enabled": null,
+                    "public_profile_url": "/u/chertkov",
+                    "avatar_img_url": "https://cdn2.hexlet.io/derivations/image/fill/290/290/eyJpZCI6ImYyNWM3MzAxNDUxODA2NDMwMDc0N2M2OTQ4OWVkMmQ2LnBuZyIsInN0b3JhZ2UiOiJzdG9yZSJ9?signature=39f562edb8d925e9fe67caab06ba5fb24cb96dca98bd98fc2aa61fa3a084d747",
+                    "has_received_mentor_response_at_least_once": true
+                },
+                "created_at": "06 февраля 2020",
+                "solution": null,
+                "can_destroy": false,
+                "can_like": true,
+                "can_update": false,
+                "can_mark_as_solution": false,
+                "likes": []
+            }, {
+                "id": 82763,
+                "body": "Всё дело в console.log получается. Но ведь return по итогу тоже \"печатает на экран\", только другим способом.",
+                "creator": {
+                    "id": 174421,
+                    "public_name": "Юлия",
+                    "isRemoved": false,
+                    "isMentor": null,
+                    "can_use_paid_features": true,
+                    "public_profile_enabled": null,
+                    "public_profile_url": "/u/yubet",
+                    "avatar_img_url": "https://cdn2.hexlet.io/derivations/image/fill/290/290/eyJpZCI6ImIwYTZlNTExNmQ2MDczODQwMGRiYjQwNGMzMmVhYmJlLmpwZyIsInN0b3JhZ2UiOiJzdG9yZSJ9?signature=17bebef225ac6105944374fc1273b76ea78ea9ab7a62b82e305e19c6d6bec179",
+                    "has_received_mentor_response_at_least_once": true
+                },
+                "created_at": "06 февраля 2020",
+                "solution": null,
+                "can_destroy": false,
+                "can_like": true,
+                "can_update": false,
+                "can_mark_as_solution": false,
+                "likes": []
+            }, {
+                "id": 82791,
+                "body": "Да, всё дело в нем. `return` не печатает на экран, а возвращает значение из функции, как вы сами написали в первом сообщении. Урок и задание как раз об этом. Печать на экран — побочный эффект, который мы выносим в отдельную функцию.",
+                "creator": {
+                    "id": 130487,
+                    "public_name": "Kirill Chertkov",
+                    "isRemoved": false,
+                    "isMentor": true,
+                    "can_use_paid_features": false,
+                    "public_profile_enabled": null,
+                    "public_profile_url": "/u/chertkov",
+                    "avatar_img_url": "https://cdn2.hexlet.io/derivations/image/fill/290/290/eyJpZCI6ImYyNWM3MzAxNDUxODA2NDMwMDc0N2M2OTQ4OWVkMmQ2LnBuZyIsInN0b3JhZ2UiOiJzdG9yZSJ9?signature=39f562edb8d925e9fe67caab06ba5fb24cb96dca98bd98fc2aa61fa3a084d747",
+                    "has_received_mentor_response_at_least_once": true
+                },
+                "created_at": "06 февраля 2020",
+                "solution": true,
+                "can_destroy": false,
+                "can_like": true,
+                "can_update": false,
+                "can_mark_as_solution": false,
+                "likes": []
+            }],
+            "useful": false,
+            "subscribers": [{
+                "id": 76768,
+                "user_id": 130487
+            }, {
+                "id": 76764,
+                "user_id": 174421
+            }],
+            "mentor": {
+                "id": 62,
+                "user_id": 130487,
+                "full_name": "Кирилл Чертков",
+                "username": "chertkov"
+            }
+        }];
+        gon.topic_type = "community";
+        gon.communitable_type = "Lesson";
+        gon.api_topics_url =
+            "https://ru.hexlet.io/api/topics/lessons.json?q%5Bcommunitable_of_Lesson_type_id_eq%5D=1628&q%5Bcommunitable_type_eq%5D=Lesson";
+        gon.communitable_id = 1628;
+        gon.can_render_new_topic_box = true;
+        gon.topics_count = 23;
+        //]]>
+    </script>
+    <script type='application/ld+json'>
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Hexlet",
+            "url": "https://hexlet.io",
+            "sameAs": ["https://www.facebook.com/Hexlet", "https://www.youtube.com/user/HexletUniversity",
+                "https://twitter.com/HexletHQ", "https://soundcloud.com/hexlet"
+            ],
+            "legalName": "Hexlet Ltd.",
+            "address": "Puolikkotie 8, 02230 Espoo, Finland",
+            "vatID": "VAT ID: FI26641607",
+            "telephone": "+44 20 3514 2938",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://cdn2.hexlet.io/assets/hexlet_logo-e99fc2b3b7c1eec88899f3af1435a39aaac6fd29d011dfe2342499c0884b7a96.png"
+            }
+        }
+    </script>
+
+    <script src="https://www.googletagmanager.com/gtag/js?id=UA-1360700-51" async="async"
+        type="adf064d97066fcb9b05c1528-text/javascript"></script>
+    <script type="adf064d97066fcb9b05c1528-text/javascript">
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments)
+        };
+        gtag('js', new Date());
+
+        var config = {
+            'optimize_id': gon.google.optimize_key
+        };
+
+        if (!gon.current_user.isGuest) {
+            config['user_id'] = gon.current_user.id;
+        }
+
+        if (gon.social_signin) {
+            config['page_referrer'] = window.location.origin;
+        }
+
+        gtag('config', gon.google.analytics_key, config);
+    </script>
+
+    <script type="adf064d97066fcb9b05c1528-text/javascript">
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({
+                'gtm.start': new Date().getTime(),
+                event: 'gtm.js'
+            });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s),
+                dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src =
+                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-WK88TH');
+    </script>
+
+    <script type="adf064d97066fcb9b05c1528-text/javascript">
+        // in development mode
+        if (!window.Rollbar) {
+            Rollbar = {
+                error: function () {},
+                configure: function () {}
+            }
+        }
+
+        Rollbar.configure({
+            payload: {
+                person: gon.current_user
+            }
+        });
+    </script>
+
+    <meta content='b9d3902d34' name='verify-admitad'>
+
+
+    <link href='/courses/js-functions/lessons/pure-functions/theory_unit' rel='canonical'>
+    <meta content='article' property='og:type'>
+    <meta content='Чистые функции / JS: Функции' property='og:title'>
+    <meta
+        content='Чистые функции / JS: Функции: Познакомиться с понятиями &quot;детерминированность&quot; и &quot;побочные эффекты&quot; (side effects).'
+        property='og:description'>
+    <meta
+        content='Чистые функции / JS: Функции: Познакомиться с понятиями &quot;детерминированность&quot; и &quot;побочные эффекты&quot; (side effects).'
+        name='description'>
+    <meta content='noarchive' name='robots'>
+    <meta
+        content='https://cdn2.hexlet.io/derivations/image/fill/600/400/eyJpZCI6IjU2MTY4YjY3MTg3OTRiNDBjMDUyNGU5MGRjYmVhNGY3LnBuZyIsInN0b3JhZ2UiOiJzdG9yZSJ9?signature=33d19b5f5ada2b20ab608b31fcb1a29d309ca1677519672925ba722d0bed8ef5'
+        property='og:image'>
+    <link
+        href='https://cdn2.hexlet.io/derivations/image/fill/600/400/eyJpZCI6IjU2MTY4YjY3MTg3OTRiNDBjMDUyNGU5MGRjYmVhNGY3LnBuZyIsInN0b3JhZ2UiOiJzdG9yZSJ9?signature=33d19b5f5ada2b20ab608b31fcb1a29d309ca1677519672925ba722d0bed8ef5'
+        rel='image_src'>
+
+</head>
+
+<body class='h-100'>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WK88TH" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+
+    <script type='application/ld+json'>
+        {
+            "@context": "https://schema.org",
+            "@type": "TechArticle",
+            "isAccessibleForFree": false,
+            "headline": "Чистые функции",
+            "datePublished": "2019-10-28T20:55:56.892+02:00",
+            "dateModified": "2020-04-06T12:58:22.685+03:00",
+            "image": "https://cdn2.hexlet.io/assets/hexlet_logo-e99fc2b3b7c1eec88899f3af1435a39aaac6fd29d011dfe2342499c0884b7a96.png",
+            "author": {
+                "@type": "Person",
+                "name": "Кирилл Мокевнин",
+                "description": "Сооснователь и CEO образовательного проекта Хекслет. Программирую с 2007 года. За это время прошёл путь от разработчика до технического директора и управляющего отдельным подразделением (филиалом). Управлял командами, в которых больше 50 разработчиков. \r\n\r\n- Программирую на языках: Elixir, Clojure, JavaScript, PHP, Ruby. \r\n- Соорганизатор конференции Nastachku.ru. \r\n- Вимер. \r\n- Топлю за DevOps и автоматизированные тесты.\r\n"
+            },
+            "publisher": {
+                "@context": "https://schema.org",
+                "@type": "Organization",
+                "name": "Hexlet",
+                "url": "https://hexlet.io",
+                "sameAs": ["https://www.facebook.com/Hexlet", "https://www.youtube.com/user/HexletUniversity",
+                    "https://twitter.com/HexletHQ", "https://soundcloud.com/hexlet"
+                ],
+                "legalName": "Hexlet Ltd.",
+                "address": "Puolikkotie 8, 02230 Espoo, Finland",
+                "vatID": "VAT ID: FI26641607",
+                "telephone": "+44 20 3514 2938",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://cdn2.hexlet.io/assets/hexlet_logo-e99fc2b3b7c1eec88899f3af1435a39aaac6fd29d011dfe2342499c0884b7a96.png"
+                }
+            },
+            "hasPart": {
+                "@type": "WebPageElement",
+                "isAccessibleForFree": false,
+                "cssSelector": ".paywall"
+            }
+        }
+    </script>
+    <div class='d-flex flex-column flex-md-row h-100'>
+        <div class='border-right flex-fill tab-content overflow-hidden h-100'>
+            <div aria-labelledby='lesson-tab' class='tab-pane fade show paywall active overflow-auto h-100' id='lesson'
+                role='tabpanel'>
+                <div class='container-fluid mb-3'>
+                    <div class='x-y-padding-like-button text-truncate'>
+                        <span class='fal fa-home'></span>
+                        <a class="x-link-without-decoration" href="/my">Мой Хекслет</a>
+                        <span class='mx-1'>→</span>
+                        <a class="x-link-without-decoration" href="/courses/js-functions">JS: Функции</a>
+                        <span class='mx-1'>→</span>
+                        <a data-toggle="modal" data-keyboard="true" data-target="#coursenav-modal"
+                            class="x-link-without-decoration" href="#coursenav-modal">Чистые функции</a>
+                    </div>
+
+                </div>
+                <div class='container mb-3'>
+                    <div class='row justify-content-center'>
+                        <div class='col-12 col-lg-10'>
+                            <div class='p-2 p-md-4 shadow-sm bg-white'>
+                                <div class='hexlet-markdown-body overflow-hidden p-2 p-md-4'>
+                                    <h1 class='mb-4'>Чистые функции</h1>
+                                    <p>Функции в программировании обладают рядом важных характеристик. Зная и понимая
+                                        их, вы сможете лучше строить работу с функциями и поймёте, в каких случаях код
+                                        следует выделять в отдельную функцию.</p>
+                                    <h2 id=“determinirovannost“>Детерминированность</h2>
+                                    <p>Функция <a
+                                            href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random"
+                                            target="_blank">Math.random()</a> возвращает случайное число от
+                                        <code>0</code> до <code>1</code>:</p>
+                                    <pre class="hljs"><code><span style="color: #0086B3">Math</span><span style="background-color: #f8f8f8">.</span><span style="background-color: #f8f8f8">random</span><span style="background-color: #f8f8f8">();</span> <span style="color: #999988;font-style: italic">// 0.9337432365797949</span>
+<span style="color: #0086B3">Math</span><span style="background-color: #f8f8f8">.</span><span style="background-color: #f8f8f8">random</span><span style="background-color: #f8f8f8">();</span> <span style="color: #999988;font-style: italic">// 0.5550694016887598</span>
+</code></pre>
+                                    <p>Функция нужная и полезная, но неудобная в отладке и тестировании. Это связано с
+                                        тем, что для одних и тех же входных аргументов (отсутствие аргументов также
+                                        попадает под это понятие), она может возвращать разные значения. Функции с таким
+                                        поведением называются недетерминированными.</p>
+
+                                    <p>Например, недетерминированными являются функции, оперирующие системным временем.
+                                        Так, функция <a
+                                            href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/now"
+                                            target="_blank">Date.now()</a> каждый раз возвращает новое значение:</p>
+                                    <pre class="hljs"><code><span style="color: #999988;font-style: italic">// Возвращает текущие время в миллисекундах</span>
+<span style="color: #0086B3">Date</span><span style="background-color: #f8f8f8">.</span><span style="background-color: #f8f8f8">now</span><span style="background-color: #f8f8f8">();</span> <span style="color: #999988;font-style: italic">// 1571909874844</span>
+<span style="color: #0086B3">Date</span><span style="background-color: #f8f8f8">.</span><span style="background-color: #f8f8f8">now</span><span style="background-color: #f8f8f8">();</span> <span style="color: #999988;font-style: italic">// 1571909876648</span>
+</code></pre>
+                                    <p>Как видно, каждую миллисекунду вызов этой функции будет возвращать новое
+                                        значение. Ещё пример: представим функцию <code>getYear()</code>, которая
+                                        возвращает текущий год:</p>
+                                    <pre class="hljs"><code><span style="background-color: #f8f8f8">getYear</span><span style="background-color: #f8f8f8">();</span> <span style="color: #999988;font-style: italic">// 2020</span>
+</code></pre>
+                                    <p>Хотя прямо сейчас повторный запуск вернёт точно такое же значение, через год оно
+                                        уже будет другим. То есть функция считается недетерминированной, если она ведёт
+                                        себя так хотя бы единожды.</p>
+
+                                    <p>Детерминированные функции, напротив, ведут себя предсказуемо. Для одних и тех же
+                                        входных данных они всегда выдают один и тот же результат. Именно такими являются
+                                        функции в математике. Для одного и того же <code>x</code> результат работы
+                                        функции <code>y = f(x)</code> будет один и тот же. Интересно то, что, например,
+                                        функция <code>console.log</code> — детерминированная. Дело в том, что она всегда
+                                        возвращает одно и тоже значение для любых входных данных. Это значение
+                                        <code>undefined</code>, а не то, что печатается на экран, как можно было бы
+                                        подумать. Печать на экран — побочный эффект, о нём мы поговорим чуть позже.</p>
+                                    <pre class="hljs"><code><span style="background-color: #f8f8f8">console</span><span style="background-color: #f8f8f8">.</span><span style="background-color: #f8f8f8">log</span><span style="background-color: #f8f8f8">(</span><span style="color: #d14">'</span><span style="color: #d14">lala</span><span style="color: #d14">'</span><span style="background-color: #f8f8f8">);</span>
+</code></pre>
+                                    <p>Вызов <code>console.log(&#39;lala&#39;)</code> выполнил два действия:</p>
+
+                                    <ul>
+                                        <li>Вывел сообщение <code>lala</code> в терминал (или консоль браузера, в
+                                            зависимости от среды выполнения)</li>
+                                        <li>Вернул значение <code>undefined</code>. Какое сообщение бы мы не печатали,
+                                            возвращаемое значение всегда будет одно — <code>undefined</code>.</li>
+                                    </ul>
+
+                                    <p>Понятие &quot;Детерминированность&quot; не ограничивается программированием или
+                                        математикой. Сквозь него можно рассматривать практически любой процесс.
+                                        Например, подбрасывание монетки — недетерминированный процесс, его результат
+                                        случаен.</p>
+
+                                    <p>Почему это понятие так важно? Детерминированность даёт нам предсказуемость, а это
+                                        прямым образом влияет на количество состояний, которые надо обрабатывать и
+                                        предусматривать. В конечном итоге, код становится проще, а логика прямолинейнее.
+                                        Пример: создание чего-либо на сайтах в интернете, обычно, недетерминированный
+                                        процесс. То есть, если быстро нажать два раза кнопку отправки формы, то во
+                                        многих ситуациях можно получить два раза оставленный комментарий, два раза
+                                        отправленные деньги. Разработчикам сайтов приходится защищаться, ставить защиту
+                                        от двойных нажатий или производить проверку на дубликаты уже внутри приложения.
+                                    </p>
+
+                                    <p>Другой пример — создание директории. В командной строке эта операция выполняется
+                                        с помощью программы <code>mkdir</code>.</p>
+                                    <pre class="hljs"><code><span style="color: #008080">$ </span><span style="color: #0086B3">mkdir test</span>
+<span style="color: #008080">$ </span><span style="color: #0086B3">mkdir test
+mkdir</span>: <span style="color: #0086B3">test</span>: File exists
+</code></pre>
+                                    <p>Как видно, повторный запуск команды создания директории выдаёт ошибку, так как
+                                        директория уже существует. Получается, нам нужно учитывать два состояния:</p>
+
+                                    <ol>
+                                        <li> Директории не существовало</li>
+                                        <li> Директория существует</li>
+                                    </ol>
+
+                                    <p>В случае детерминированной версии <code>mkdir</code> об этом можно было бы не
+                                        думать.</p>
+
+                                    <p><em>Понятие детерминированности играет огромную роль в администрировании, в
+                                            задачах связанных с программной настройкой серверов (configuration
+                                            management), выкладкой ПО и обновлениями. Ключевые слова: docker, immutable
+                                            infrastructure, ansible.</em></p>
+
+                                    <p>Функция становится недетерминированной и в том случае, если она обращается не
+                                        только к своим аргументам, но и некоторым внешним данным, например глобальным
+                                        переменным, переменным окружения и так далее. Так происходит потому, что внешние
+                                        данные могут измениться, и функция начнёт выдавать другой результат, даже если в
+                                        неё передаются одни и те же аргументы.</p>
+                                    <pre class="hljs"><code><span style="color: #000000;font-weight: bold">const</span> <span style="background-color: #f8f8f8">getCurrentShell</span> <span style="color: #000000;font-weight: bold">=</span> <span style="background-color: #f8f8f8">()</span> <span style="color: #000000;font-weight: bold">=&gt;</span> <span style="background-color: #f8f8f8">process</span><span style="background-color: #f8f8f8">.</span><span style="background-color: #f8f8f8">env</span><span style="background-color: #f8f8f8">.</span><span style="background-color: #f8f8f8">SHELL</span><span style="background-color: #f8f8f8">;</span>
+
+<span style="background-color: #f8f8f8">getCurrentShell</span><span style="background-color: #f8f8f8">();</span> <span style="color: #999988;font-style: italic">// /bin/bash</span>
+</code></pre>
+                                    <p>Функция <code>getCurrentShell</code> обращается к переменной окружения
+                                        <code>SHELL</code>. Но в разные моменты времени и в разных окружениях значение
+                                        этой переменой может быть различным.</p>
+
+                                    <p>В общем случае нельзя сказать, что отсутствие детерминированности — абсолютное
+                                        зло. Более того, многих полезных программ попросту бы не существовало без
+                                        возможности писать недетерминированный код. Общая рекомендация при работе с
+                                        детерминированностью звучит следующим образом. Если есть возможность написать
+                                        функцию так, что она будет детерминированной, то так и делайте. Не используйте
+                                        глобальных переменных, создавайте функции, зависящие только от своих собственных
+                                        аргументов.</p>
+                                    <h2 id=“pobochnye-effekty-side-effects“>Побочные эффекты (side effects)</h2>
+                                    <p>Вторая ключевая характеристика функций — наличие побочных эффектов. Побочным
+                                        эффектом называют любые действия, изменяющие среду выполнения. К ним относятся
+                                        любые файловые операции, такие как запись в файл, чтение файла, отправка или
+                                        приём данных по сети и даже вывод в консоль. Кроме того, побочными эффектами
+                                        считаются обращения к глобальным переменным (как на чтение, так и запись) и
+                                        изменение входных аргументов в случае, когда они передаются по ссылке. Вызов
+                                        функции с побочными эффектами также считается побочным эффектом.</p>
+                                    <pre class="hljs"><code><span style="color: #000000;font-weight: bold">const</span> <span style="background-color: #f8f8f8">sayHiTo</span> <span style="color: #000000;font-weight: bold">=</span> <span style="background-color: #f8f8f8">(</span><span style="background-color: #f8f8f8">name</span><span style="background-color: #f8f8f8">)</span> <span style="color: #000000;font-weight: bold">=&gt;</span> <span style="background-color: #f8f8f8">{</span>
+  <span style="color: #000000;font-weight: bold">const</span> <span style="background-color: #f8f8f8">greeting</span> <span style="color: #000000;font-weight: bold">=</span> <span style="color: #d14">`Hi, </span><span style="background-color: #f8f8f8">${</span><span style="background-color: #f8f8f8">name</span><span style="background-color: #f8f8f8">}</span><span style="color: #d14">!`</span><span style="background-color: #f8f8f8">;</span>
+  <span style="background-color: #f8f8f8">console</span><span style="background-color: #f8f8f8">.</span><span style="background-color: #f8f8f8">log</span><span style="background-color: #f8f8f8">(</span><span style="background-color: #f8f8f8">greeting</span><span style="background-color: #f8f8f8">);</span>
+<span style="background-color: #f8f8f8">};</span>
+</code></pre>
+                                    <p>С другой стороны, любые вычислительные операции не являются побочными эффектами.
+                                        Например, функция, суммирующая два переданных аргументами числа.</p>
+                                    <pre class="hljs"><code><span style="color: #000000;font-weight: bold">const</span> <span style="background-color: #f8f8f8">sum</span> <span style="color: #000000;font-weight: bold">=</span> <span style="background-color: #f8f8f8">(</span><span style="background-color: #f8f8f8">num1</span><span style="background-color: #f8f8f8">,</span> <span style="background-color: #f8f8f8">num2</span><span style="background-color: #f8f8f8">)</span> <span style="color: #000000;font-weight: bold">=&gt;</span> <span style="background-color: #f8f8f8">{</span>
+  <span style="color: #000000;font-weight: bold">const</span> <span style="background-color: #f8f8f8">result</span> <span style="color: #000000;font-weight: bold">=</span> <span style="background-color: #f8f8f8">num1</span> <span style="color: #000000;font-weight: bold">+</span> <span style="background-color: #f8f8f8">num2</span><span style="background-color: #f8f8f8">;</span>
+  <span style="color: #000000;font-weight: bold">return</span> <span style="background-color: #f8f8f8">result</span><span style="background-color: #f8f8f8">;</span>
+<span style="background-color: #f8f8f8">};</span>
+
+<span style="color: #999988;font-style: italic">// далее, там где можно, будем демонстрировать вариант однострочника, например:</span>
+<span style="color: #999988;font-style: italic">// const sum = (num1, num2) =&gt; num1 + num2;</span>
+</code></pre>
+                                    <p>Без побочных эффектов невозможно написать ни одной полезной программы. Какие бы
+                                        важные вычисления она ни делала, их результат должен быть как-то
+                                        продемонстрирован. В самом простом случае его нужно вывести на экран, что
+                                        автоматически приводит нас к побочным эффектам:</p>
+                                    <pre class="hljs"><code><span style="background-color: #f8f8f8">console</span><span style="background-color: #f8f8f8">.</span><span style="background-color: #f8f8f8">log</span><span style="background-color: #f8f8f8">(</span><span style="background-color: #f8f8f8">sum</span><span style="background-color: #f8f8f8">(</span><span style="color: #009999">4</span><span style="background-color: #f8f8f8">,</span> <span style="color: #009999">11</span><span style="background-color: #f8f8f8">));</span> <span style="color: #999988;font-style: italic">// =&gt; 15</span>
+</code></pre>
+                                    <p>Побочные эффекты составляют одну из самых больших сложностей при разработке. Их
+                                        наличие значительно затрудняет тестирование и отладку. Приводит к возникновению
+                                        огромного числа ошибок (только при работе с файлами количество возможных ошибок
+                                        измеряется сотней: начиная с того, что закончилось место на диске, заканчивая
+                                        попыткой читать данные из несуществующего файла). Для их предотвращения код
+                                        обрастает большим числом проверок и защитных механизмов.</p>
+
+                                    <p>Не существует способа избавиться от побочных эффектов совсем, но их влияние на
+                                        программу можно минимизировать. Как правило, в типичной программе побочных
+                                        эффектов не так много по отношению к остальному коду, и происходят они лишь в
+                                        самом начале и в конце.</p>
+
+                                    <p>Например, программа, которая конвертирует файл из текстового формата в PDF, в
+                                        идеале выполняет ровно два побочных эффекта:</p>
+
+                                    <ol>
+                                        <li> Читает файл в самом начале работы программы.</li>
+                                        <li> Записывает результат работы программы в новый файл.</li>
+                                    </ol>
+
+                                    <p>Между этими двумя пунктами и происходит основная работа, которая содержит чистую
+                                        алгоритмическую часть. Следовательно, побочные эффекты будут находиться только в
+                                        верхнем слое приложения, а ядро, выполняющее основную работу, останется чистым
+                                        от них.</p>
+
+                                    <p><em>Инкремент и декремент — единственные базовые арифметические операции в JS,
+                                            которые обладают побочными эффектами (изменяют само значение в переменной).
+                                            Именно поэтому с ними сложно работать в составных выражениях. Они могут
+                                            приводить к таким сложноотлавливаемым ошибкам, что во многих языках вообще
+                                            отказались от их введения (в Ruby и Python их нет). В JS <a
+                                                href="https://github.com/leonidlebedev/javascript-airbnb#variables--unary-increment-decrement"
+                                                target="_blank">стандарты кодирования</a> предписывают их не
+                                            использовать.</em></p>
+                                    <h2 id=“chistye-funktsii“>Чистые функции</h2>
+                                    <p><img src="https://cdn2.hexlet.io/derivations/image/original/eyJpZCI6IjhlOTg1NmYzMjUwNTk5MGEyMWFlY2FhMDU5OTNmNzM2LmpwZyIsInN0b3JhZ2UiOiJjYWNoZSJ9?signature=846ff13fb2facdf2c72198f0c65d99a425941d0bec0d37e6195df5fdf3c8fdfd"
+                                            alt="Pure Functions"></p>
+
+                                    <p>Идеальная функция с точки зрения удобства работы с ней называется чистой (pure).
+                                        Чистая функция — это детерминированная функция, которая не производит побочных
+                                        эффектов. Такая функция зависит только от своих входных аргументов и всегда
+                                        ведёт себя предсказуемо. Такие функции на 100% соответствуют своим
+                                        математическим аналогам и могут рассматриваться как математические функции.</p>
+
+                                    <p>Чистые функции обладают рядом ключевых достоинств:</p>
+
+                                    <ul>
+                                        <li>Их просто тестировать. Достаточно передать на вход функции нужные параметры
+                                            и посмотреть ожидаемый выход.</li>
+                                        <li>Их безопасно запускать повторно, что особенно актуально в асинхронном коде
+                                            или в случае многопоточного кода.</li>
+                                        <li>Их легко комбинировать, получая новое поведение без необходимости
+                                            переписывать программу (подробнее далее по курсу).</li>
+                                    </ul>
+
+                                    <p>В хорошо спроектированных программах побочные эффекты стараются изолировать в
+                                        небольшой части приложения так, чтобы большая часть кода была чистой.</p>
+
+                                    <p>Прямо сейчас сказанное выше может звучать довольно абстрактно. Осознание этой
+                                        темы требует не только общего понимания прочитанного, но и набитых шишек,
+                                        связанных со сложностью работы в мешанине побочных эффектов. Тему чистоты мы
+                                        будем поднимать регулярно. Особенно сильно она прорабатывается в проектах, на
+                                        живом коде.</p>
+
+                                    <hr class='my-5'>
+                                    <h4 class='mb-4'>Дополнительные материалы</h4>
+                                    <ol>
+                                        <li class='lead'>
+                                            <a target="_blank"
+                                                href="https://ru.wikipedia.org/wiki/Побочный_эффект_(программирование)">Побочные
+                                                эффекты</a>
+                                        </li>
+                                        <li class='lead'>
+                                            <a target="_blank"
+                                                href="https://ru.wikipedia.org/wiki/Чистота_функции#Детерминированность_функции">Детерминированная
+                                                функция</a>
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div aria-labelledby='community-tab' class='tab-pane fade overflow-auto h-100' id='community'
+                role='tabpanel'>
+                <div class='container-fluid mb-3'>
+                    <div class='x-y-padding-like-button text-truncate'>
+                        <span class='fal fa-home'></span>
+                        <a class="x-link-without-decoration" href="/my">Мой Хекслет</a>
+                        <span class='mx-1'>→</span>
+                        <a class="x-link-without-decoration" href="/courses/js-functions">JS: Функции</a>
+                        <span class='mx-1'>→</span>
+                        <a data-toggle="modal" data-keyboard="true" data-target="#coursenav-modal"
+                            class="x-link-without-decoration" href="#coursenav-modal">Чистые функции</a>
+                    </div>
+
+                </div>
+                <div class='container px-lg-5'>
+                    <div class='row'>
+                        <div class='col-12 col-lg-10 col-xl-9 mx-auto'>
+                            <div id='community-box'></div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class='px-0 d-flex flex-row-reverse flex-md-column flex-shrink-0 h-auto mw-100 justify-content-between sticky-top fixed-bottom'
+            id='hexlet-lesson-sidebar'>
+            <div class='col-8 col-md-12 d-flex flex-row-reverse flex-fill d-md-block px-0'>
+                <div class='col-4 col-md-auto px-0'>
+                    <form class="button_to" method="post"
+                        action="/courses/js-functions/lessons/pure-functions/finish_unit?unit=theory"><input
+                            type="hidden" name="_method" value="patch" /><button data-disable-with="<span class=&quot;spinner-border spinner-border-sm&quot; role=&quot;status&quot; aria-hidden=&quot;true&quot;></span><span class=&quot;d-none d-md-inline&quot;>&nbsp;Подождите...</span>
+" aria-expanded="false" data-html="true"
+                            class="btn btn-primary btn-block rounded-0 d-sm-flex justify-content-center align-items-center shadow-none col-auto"
+                            id="finish-button" type="submit"><span class='d-none d-sm-block mr-2'>Далее</span>
+                            <span class='far fa-arrow-right'></span>
+                        </button><input type="hidden" name="authenticity_token"
+                            value="ZdcW4tpIMtdkTIaky9JWtT8FwKHqkLn0FYbi6m8Fzw3KtEjZdRLPrHdelh8HbY8kHTvjYAkDOJMVd74uODsCdQ==" />
+                    </form>
+                </div>
+                <div class='mt-md-3 flex-fill p-0'>
+                    <div class='px-2 mb-4 d-none d-md-block'>
+                        <span class='d-none d-sm-block small text-center mb-2'>
+                            пройдено 9 шагов из 33
+                        </span>
+                        <div class='mr-2 px-1'>
+                            <div class='progress mb-1 rounded-0'>
+                                <div class='progress-bar m-0 bg-success' style='width: 28%'></div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class='nav nav-tabs d-flex flex-row-reverse flex-md-column flex-nowrap flex-md-wrap flex-grow-1 justify-content-around justify-content-md-start border-top border-bottom-0'
+                        id='myTab' role='tablist'>
+                        <li class='nav-item mb-0'>
+                            <a class="nav-link active rounded-0 text-center text-sm-left m-0 border-0 hexlet-nav-item-hover"
+                                id="lesson-tab" role="tab" aria-controls="lesson" aria-selected="true" data-toggle="tab"
+                                href="#lesson"><span class='d-none d-md-inline-block'>
+                                    Шаг:
+                                </span>
+                                <span class='d-none d-md-inline-block'>теория</span>
+                                <span class='d-inline-block d-md-none'>
+                                    <span class='far fa-file-alt'></span>
+                                </span>
+                            </a></li>
+                        <li class='nav-item mb-0'>
+                            <a class="nav-link rounded-0 text-center text-sm-left m-0 border-0 hexlet-nav-item-hover"
+                                id="community-tab" role="tab" aria-controls="community" aria-selected="false"
+                                data-toggle="tab" data-target="#community"
+                                href="/courses/js-functions/lessons/pure-functions/theory_unit#community"><span
+                                    class='d-none d-md-inline-block'>Обсуждение</span>
+                                <span class='d-inline-block d-md-none'>
+                                    <span class='far fa-comments'></span>
+                                </span>
+                            </a></li>
+                    </ul>
+
+                </div>
+            </div>
+            <div
+                class='d-flex flex-row-reverse flex-fill flex-md-grow-0 flex-md-column justify-content-around justify-content-md-start mt-md-3 border-top px-0'>
+                <a data-toggle="modal" data-keyboard="true" data-target="#coursenav-modal"
+                    class="hexlet-lesson-sidebar-secondary-button x-link-without-decoration py-2 px-1 px-md-3 d-flex flex-shrink-0 justify-content-center justify-content-sm-start"
+                    href="#coursenav-modal"><span class='x-icon-default-size'>
+                        <span class='fal fa-sitemap'></span>
+                    </span>
+                    <span class='d-none d-md-block ml-2'>Навигация</span>
+                </a><a
+                    class="hexlet-lesson-sidebar-secondary-button x-link-without-decoration justify-content-center justify-content-sm-start py-2 px-1 px-md-3 d-flex flex-shrink-0"
+                    id="open-lesson-beacon" href="#"><span class='x-icon-default-size'>
+                        <span class='fal fa-question-circle'></span>
+                    </span>
+                    <span class='d-none d-md-block ml-2'>Техподдержка</span>
+                </a></div>
+
+        </div>
+    </div>
+    <div aria-hidden='true' aria-labelledby='coursenav-modal' class='modal fade' id='coursenav-modal' role='dialog'
+        tabindex='-1'>
+        <div class='modal-dialog' role='document'>
+            <div class='modal-content'>
+                <div class='modal-header'>
+                    <h6 class='modal-title'>
+                        <a class="x-link-without-decoration" href="/my">Мой Хекслет
+                        </a>→
+                        <a class="x-link-without-decoration" href="/courses/js-functions"><span>Курс</span>
+                            <span>
+                                «JS: Функции»
+                            </span>
+                        </a></h6>
+                    <button aria-label='Close' class='close' data-dismiss='modal' type='button'>
+                        <span aria-hidden='true'>×</span>
+                    </button>
+                </div>
+                <div class='modal-body scrollable px-4'>
+                    <div class='mb-3'>
+                        <span class=''>
+                            1.
+                            <a href="/courses/js-functions/lessons/about/theory_unit">О курсе</a>
+                        </span>
+                        <p class='m-0'>
+                            <div class='small'>
+                                <span class='mr-2'>↳</span>
+                                <span class='x-striked'>
+                                    <a href="/courses/js-functions/lessons/about/theory_unit">теория</a>
+                                </span>
+
+                            </div>
+                        </p>
+                    </div>
+                    <div class='mb-3'>
+                        <span class='font-weight-bolder'>
+                            2.
+                            <a href="/courses/js-functions/lessons/pure-functions/theory_unit">Чистые функции</a>
+                        </span>
+                        <p class='m-0'>
+                            <div class='small'>
+                                <span class='mr-2'>↳</span>
+                                <span class='x-striked font-weight-bolder text-dark'>
+                                    <a href="/courses/js-functions/lessons/pure-functions/theory_unit">теория</a>
+                                </span>
+
+                                <span class='mx-1'>/</span>
+                                <span class=''>
+                                    <a href="/courses/js-functions/lessons/pure-functions/quiz_unit">тесты</a>
+                                </span>
+
+                                <span class='mx-1'>/</span>
+                                <span class=''>
+                                    <a href="/courses/js-functions/lessons/pure-functions/exercise_unit">упражнение</a>
+                                </span>
+
+                            </div>
+                        </p>
+                    </div>
+                    <div class='mb-3'>
+                        <span class=''>
+                            3.
+                            <a href="/courses/js-functions/lessons/command-query-separation/theory_unit">Разделение
+                                команд и запросов</a>
+                        </span>
+                        <p class='m-0'>
+                            <div class='small'>
+                                <span class='mr-2'>↳</span>
+                                <span class='x-striked'>
+                                    <a
+                                        href="/courses/js-functions/lessons/command-query-separation/theory_unit">теория</a>
+                                </span>
+
+                            </div>
+                        </p>
+                    </div>
+                    <div class='mb-3'>
+                        <span class=''>
+                            4.
+                            <a href="/courses/js-functions/lessons/rest-operator/theory_unit">Оператор Rest (упаковка
+                                аргументов)</a>
+                        </span>
+                        <p class='m-0'>
+                            <div class='small'>
+                                <span class='mr-2'>↳</span>
+                                <span class='x-striked'>
+                                    <a href="/courses/js-functions/lessons/rest-operator/theory_unit">теория</a>
+                                </span>
+
+                                <span class='mx-1'>/</span>
+                                <span class=''>
+                                    <a href="/courses/js-functions/lessons/rest-operator/quiz_unit">тесты</a>
+                                </span>
+
+                                <span class='mx-1'>/</span>
+                                <span class=''>
+                                    <a href="/courses/js-functions/lessons/rest-operator/exercise_unit">упражнение</a>
+                                </span>
+
+                            </div>
+                        </p>
+                    </div>
+                    <div class='mb-3'>
+                        <span class=''>
+                            5.
+                            <a href="/courses/js-functions/lessons/spread-operator/theory_unit">Оператор Spread
+                                (распаковка аргументов)</a>
+                        </span>
+                        <p class='m-0'>
+                            <div class='small'>
+                                <span class='mr-2'>↳</span>
+                                <span class='x-striked'>
+                                    <a href="/courses/js-functions/lessons/spread-operator/theory_unit">теория</a>
+                                </span>
+
+                                <span class='mx-1'>/</span>
+                                <span class=''>
+                                    <a href="/courses/js-functions/lessons/spread-operator/quiz_unit">тесты</a>
+                                </span>
+
+                                <span class='mx-1'>/</span>
+                                <span class=''>
+                                    <a href="/courses/js-functions/lessons/spread-operator/exercise_unit">упражнение</a>
+                                </span>
+
+                            </div>
+                        </p>
+                    </div>
+                    <div class='mb-3'>
+                        <span class=''>
+                            6.
+                            <a href="/courses/js-functions/lessons/params-destructuring/theory_unit">Деструктуризация
+                                параметров</a>
+                        </span>
+                        <p class='m-0'>
+                            <div class='small'>
+                                <span class='mr-2'>↳</span>
+                                <span class='x-striked'>
+                                    <a href="/courses/js-functions/lessons/params-destructuring/theory_unit">теория</a>
+                                </span>
+
+                            </div>
+                        </p>
+                    </div>
+                    <div class='mb-3'>
+                        <span class=''>
+                            7.
+                            <a href="/courses/js-functions/lessons/first-class-citizen/theory_unit">Объекты первого
+                                класса</a>
+                        </span>
+                        <p class='m-0'>
+                            <div class='small'>
+                                <span class='mr-2'>↳</span>
+                                <span class='x-striked'>
+                                    <a href="/courses/js-functions/lessons/first-class-citizen/theory_unit">теория</a>
+                                </span>
+
+                                <span class='mx-1'>/</span>
+                                <span class=''>
+                                    <a href="/courses/js-functions/lessons/first-class-citizen/quiz_unit">тесты</a>
+                                </span>
+
+                                <span class='mx-1'>/</span>
+                                <span class=''>
+                                    <a
+                                        href="/courses/js-functions/lessons/first-class-citizen/exercise_unit">упражнение</a>
+                                </span>
+
+                            </div>
+                        </p>
+                    </div>
+                    <div class='mb-3'>
+                        <span class=''>
+                            8.
+                            <a href="/courses/js-functions/lessons/high-order-functions/theory_unit">Функции высшего
+                                порядка</a>
+                        </span>
+                        <p class='m-0'>
+                            <div class='small'>
+                                <span class='mr-2'>↳</span>
+                                <span class='x-striked'>
+                                    <a href="/courses/js-functions/lessons/high-order-functions/theory_unit">теория</a>
+                                </span>
+
+                                <span class='mx-1'>/</span>
+                                <span class=''>
+                                    <a href="/courses/js-functions/lessons/high-order-functions/quiz_unit">тесты</a>
+                                </span>
+
+                                <span class='mx-1'>/</span>
+                                <span class=''>
+                                    <a
+                                        href="/courses/js-functions/lessons/high-order-functions/exercise_unit">упражнение</a>
+                                </span>
+
+                            </div>
+                        </p>
+                    </div>
+                    <div class='mb-3'>
+                        <span class=''>
+                            9.
+                            <a href="/courses/js-functions/lessons/map/theory_unit">Отображение (map)</a>
+                        </span>
+                        <p class='m-0'>
+                            <div class='small'>
+                                <span class='mr-2'>↳</span>
+                                <span class=''>
+                                    <a href="/courses/js-functions/lessons/map/theory_unit">теория</a>
+                                </span>
+
+                                <span class='mx-1'>/</span>
+                                <span class=''>
+                                    <a href="/courses/js-functions/lessons/map/quiz_unit">тесты</a>
+                                </span>
+
+                                <span class='mx-1'>/</span>
+                                <span class=''>
+                                    <a href="/courses/js-functions/lessons/map/exercise_unit">упражнение</a>
+                                </span>
+
+                            </div>
+                        </p>
+                    </div>
+                    <div class='mb-3'>
+                        <span class=''>
+                            10.
+                            <a href="/courses/js-functions/lessons/filter/theory_unit">Фильтрация (filter)</a>
+                        </span>
+                        <p class='m-0'>
+                            <div class='small'>
+                                <span class='mr-2'>↳</span>
+                                <span class='x-striked'>
+                                    <a href="/courses/js-functions/lessons/filter/theory_unit">теория</a>
+                                </span>
+
+                                <span class='mx-1'>/</span>
+                                <span class=''>
+                                    <a href="/courses/js-functions/lessons/filter/quiz_unit">тесты</a>
+                                </span>
+
+                                <span class='mx-1'>/</span>
+                                <span class=''>
+                                    <a href="/courses/js-functions/lessons/filter/exercise_unit">упражнение</a>
+                                </span>
+
+                            </div>
+                        </p>
+                    </div>
+                    <div class='mb-3'>
+                        <span class=''>
+                            11.
+                            <a href="/courses/js-functions/lessons/reduce/theory_unit">Агрегация (reduce)</a>
+                        </span>
+                        <p class='m-0'>
+                            <div class='small'>
+                                <span class='mr-2'>↳</span>
+                                <span class=''>
+                                    <a href="/courses/js-functions/lessons/reduce/theory_unit">теория</a>
+                                </span>
+
+                                <span class='mx-1'>/</span>
+                                <span class=''>
+                                    <a href="/courses/js-functions/lessons/reduce/quiz_unit">тесты</a>
+                                </span>
+
+                                <span class='mx-1'>/</span>
+                                <span class=''>
+                                    <a href="/courses/js-functions/lessons/reduce/exercise_unit">упражнение</a>
+                                </span>
+
+                            </div>
+                        </p>
+                    </div>
+                    <div class='mb-3'>
+                        <span class=''>
+                            12.
+                            <a href="/courses/js-functions/lessons/signals/theory_unit">Сигналы</a>
+                        </span>
+                        <p class='m-0'>
+                            <div class='small'>
+                                <span class='mr-2'>↳</span>
+                                <span class=''>
+                                    <a href="/courses/js-functions/lessons/signals/theory_unit">теория</a>
+                                </span>
+
+                                <span class='mx-1'>/</span>
+                                <span class=''>
+                                    <a href="/courses/js-functions/lessons/signals/quiz_unit">тесты</a>
+                                </span>
+
+                                <span class='mx-1'>/</span>
+                                <span class=''>
+                                    <a href="/courses/js-functions/lessons/signals/exercise_unit">упражнение</a>
+                                </span>
+
+                            </div>
+                        </p>
+                    </div>
+                    <div class='mb-3'>
+                        <span class=''>
+                            13.
+                            <a href="/courses/js-functions/lessons/paradigms/theory_unit">Парадигмы программирования</a>
+                        </span>
+                        <p class='m-0'>
+                            <div class='small'>
+                                <span class='mr-2'>↳</span>
+                                <span class=''>
+                                    <a href="/courses/js-functions/lessons/paradigms/theory_unit">теория</a>
+                                </span>
+
+                                <span class='mx-1'>/</span>
+                                <span class=''>
+                                    <a href="/courses/js-functions/lessons/paradigms/exercise_unit">упражнение</a>
+                                </span>
+
+                            </div>
+                        </p>
+                    </div>
+                    <div class='mb-3'>
+                        <span class=''>
+                            14.
+                            <a href="/courses/js-functions/lessons/abstraction/theory_unit">Абстракция с помощью
+                                функций</a>
+                        </span>
+                        <p class='m-0'>
+                            <div class='small'>
+                                <span class='mr-2'>↳</span>
+                                <span class=''>
+                                    <a href="/courses/js-functions/lessons/abstraction/theory_unit">теория</a>
+                                </span>
+
+                            </div>
+                        </p>
+                    </div>
+                </div>
+                <div class='modal-footer'>
+                    <button class='btn btn-outline-info' data-dismiss='modal' type='button'>Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script
+        src="https://cdn2.hexlet.io/assets/application-a98bdd3e8e9c003cf0655b2197f00166c7a0d40da9c84b4a0de6c58df300ac68.js"
+        type="adf064d97066fcb9b05c1528-text/javascript"></script>
+    <script src="https://cdn2.hexlet.io/packs/js/runtime~application-2236df4720d857b257d4.js"
+        type="adf064d97066fcb9b05c1528-text/javascript"></script>
+    <script src="https://cdn2.hexlet.io/packs/js/2-495826567c2405fd2cdf.chunk.js"
+        type="adf064d97066fcb9b05c1528-text/javascript"></script>
+    <script src="https://cdn2.hexlet.io/packs/js/41-fd87935a08fbbe439f6d.chunk.js"
+        type="adf064d97066fcb9b05c1528-text/javascript"></script>
+    <script src="https://cdn2.hexlet.io/packs/js/application-8148be7d0d3e1117f5d7.chunk.js"
+        type="adf064d97066fcb9b05c1528-text/javascript"></script>
+    <script src="https://cdn2.hexlet.io/packs/js/runtime~community-b20519b83a674c75a0ba.js" defer="defer"
+        type="adf064d97066fcb9b05c1528-text/javascript"></script>
+    <script src="https://cdn2.hexlet.io/packs/js/0-3955e5b12bc1d7eef44b.chunk.js" defer="defer"
+        type="adf064d97066fcb9b05c1528-text/javascript"></script>
+    <script src="https://cdn2.hexlet.io/packs/js/1-e9b7b67efea97b06cd15.chunk.js" defer="defer"
+        type="adf064d97066fcb9b05c1528-text/javascript"></script>
+    <script src="https://cdn2.hexlet.io/packs/js/community-43cb105585f1f7eea008.chunk.js" defer="defer"
+        type="adf064d97066fcb9b05c1528-text/javascript"></script>
+    <script type="adf064d97066fcb9b05c1528-text/javascript">
+        var el = document.getElementById('open-lesson-beacon');
+        el.addEventListener('click', function () {
+            Beacon('open')
+        });
+    </script>
+
+    <script type="adf064d97066fcb9b05c1528-text/javascript">
+        ! function (e, t, n) {
+            function a() {
+                var e = t.getElementsByTagName("script")[0],
+                    n = t.createElement("script");
+                n.type = "text/javascript", n.async = !0, n.src = "https://beacon-v2.helpscout.net", e.parentNode
+                    .insertBefore(n, e)
+            }
+            if (e.Beacon = n = function (t, n, a) {
+                    e.Beacon.readyQueue.push({
+                        method: t,
+                        options: n,
+                        data: a
+                    })
+                }, n.readyQueue = [], "complete" === t.readyState) return a();
+            e.attachEvent ? e.attachEvent("onload", a) : e.addEventListener("load", a, !1)
+        }(window, document, window.Beacon || function () {});
+
+        if (gon.hs.autoloadBeacon) {
+            Beacon('init', '675c17d2-9998-428b-941d-6eace798ce61')
+        } else {
+            Beacon('init', '2319ce33-d924-46b5-89b0-2a78057cdb7d')
+        }
+
+        if (!gon.current_user.isGuest) {
+            Beacon('on', 'open', function () {
+                Beacon('identify', {
+                    name: gon.current_user.public_name,
+                    email: gon.current_user.email,
+                    PaidDaysCount: gon.current_user.paid_days_count,
+                    CanUsePaidFeatures: gon.current_user.can_use_paid_features,
+                    CurrentCompany: gon.current_user.current_company,
+                    СurrentCompanyUrl: gon.current_user.current_company_url,
+                    CreatedAt: gon.current_user.created_at,
+                    Profile: gon.current_user.url
+                });
+            });
+        }
+    </script>
+
+
+    <script src="https://ajax.cloudflare.com/cdn-cgi/scripts/7089c43e/cloudflare-static/rocket-loader.min.js"
+        data-cf-settings="adf064d97066fcb9b05c1528-|49" defer=""></script>
+</body>
+
+</html>
